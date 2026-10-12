@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DMzCarCare — Car care &amp; detailing</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+
+:root {
+  --bg: #edecec;
+  --ink: #09090b;
+  --muted: #575757;
+  --soft: #8a8a8a;
+  --yellow: #e4eb29;
+  --white: #ffffff;
+  --card: #1b1b1b;
+  --black: #09090b;
+  --line: rgba(255, 255, 255, 0.12);
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  --radius: 36px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --max: 1280px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter Tight", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: clip;
+}
+img, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font-family: inherit; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  margin: 0;
+}
+
+.wrap {
+  width: min(var(--max), calc(100% - 72px));
+  margin: 0 auto;
+}
+
+/* Buttons — duplicated label slides up on hover */
+.btn {
+  --btn-bg: var(--yellow);
+  --btn-fg: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  cursor: pointer;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform 0.45s var(--ease), background 0.3s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-text {
+  display: flex;
+  flex-direction: column;
+  height: 1em;
+  overflow: hidden;
+}
+.btn-text span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  transition: transform 0.5s var(--ease);
+}
+.btn:hover .btn-text span { transform: translateY(-100%); }
+.btn-dark { --btn-bg: var(--ink); --btn-fg: #fff; }
+.btn-white { --btn-bg: #fff; --btn-fg: var(--ink); }
+.btn-sm { height: 40px; padding: 0 16px; font-size: 14px; }
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.4s var(--ease);
+}
+.icon-btn:hover { background: var(--yellow); color: var(--ink); transform: rotate(90deg); }
+.icon-btn.dark {
+  background: var(--ink);
+  color: #fff;
+}
+.icon-btn.dark:hover { background: var(--yellow); color: var(--ink); transform: translateX(4px) rotate(0deg); }
+
+/* Nav */
+.nav-slot {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  pointer-events: none;
+  animation: navDrop 0.9s var(--ease) both;
+}
+body.inner .nav-slot {
+  position: relative;
+  top: 0;
+  padding: 22px 20px 6px;
+}
+.nav {
+  pointer-events: auto;
+  width: min(860px, 100%);
+  height: 68px;
+  padding: 10px 10px 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-radius: 999px;
+  background: rgba(12, 12, 14, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+}
+body.inner .nav {
+  background: rgba(12, 12, 14, 0.92);
+}
+.logo { display: flex; align-items: center; flex: 0 0 auto; gap: 1px; color: #fff; }
+.logo-mark, .logo-word { font-family: "Chakra Petch", sans-serif; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+.logo-mark { color: var(--yellow); font-size: 22px; }
+.logo-word { font-size: 15px; font-weight: 600; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+.nav-links a, .drop-toggle {
+  position: relative;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 12px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-links a::after, .drop-toggle::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 1px;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+.nav-links a:hover::after, .nav-links a.active::after, .drop.open .drop-toggle::after {
+  transform: scaleX(1);
+}
+.chev {
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: translateY(-1px) rotate(45deg);
+  transition: transform 0.35s var(--ease);
+}
+.drop.open .chev { transform: translateY(2px) rotate(225deg); }
+.drop { position: relative; }
+.drop-menu {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  translate: -50% 8px;
+  min-width: 220px;
+  padding: 10px;
+  border-radius: 22px;
+  background: rgba(16, 16, 18, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px) scale(0.98);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.drop.open .drop-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+.drop-menu a {
+  display: flex;
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+}
+.drop-menu a::after { display: none; }
+.drop-menu a:hover { background: rgba(255, 255, 255, 0.08); }
+.nav .btn { margin-left: auto; height: 46px; }
+.burger {
+  display: none;
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  position: relative;
+}
+.burger span, .burger span::before, .burger span::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 1.5px;
+  background: #fff;
+  transition: 0.3s var(--ease);
+}
+.burger span { top: 21px; }
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+.nav.open .burger span { background: transparent; }
+.nav.open .burger span::before { top: 0; transform: rotate(45deg); }
+.nav.open .burger span::after { top: 0; transform: rotate(-45deg); }
+
+/* Hero */
+.hero {
+  position: relative;
+  margin: 10px;
+  height: calc(100vh - 20px);
+  min-height: 760px;
+  border-radius: 32px;
+  background: #111;
+  color: #fff;
+}
+.hero-media {
+  position: absolute;
+  inset: 0;
+  border-radius: 32px;
+  overflow: hidden;
+}
+.hero-shade { border-radius: 32px; }
+.hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-media img {
+  animation: ken 22s var(--ease) infinite alternate;
+}
+.hero-media img.alt {
+  opacity: 0;
+  animation: ken 22s var(--ease) infinite alternate, cross 12s ease-in-out infinite;
+}
+@keyframes ken {
+  from { transform: scale(1.04); }
+  to { transform: scale(1.14); }
+}
+@keyframes cross {
+  0%, 42% { opacity: 0; }
+  52%, 90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.05) 32%, rgba(0, 0, 0, 0.15) 58%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+.hero-bottom {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  bottom: 78px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  z-index: 2;
+}
+.hero h1 {
+  font-size: clamp(72px, 9.4vw, 180px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+}
+.hero-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  color: var(--ink);
+  border-radius: 28px;
+  padding: 12px 22px 12px 12px;
+  min-width: 380px;
+  box-shadow: var(--shadow);
+  transition: transform 0.45s var(--ease);
+}
+.hero-card:hover { transform: translateY(-6px); }
+.hero-card img {
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  object-fit: cover;
+}
+.hero-card p { margin: 0 0 4px; color: var(--muted); font-size: 14px; }
+.hero-card strong {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-size: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  animation: hintIn 1s 0.35s var(--ease) both;
+}
+@keyframes hintIn {
+  from { opacity: 0; transform: translate(-50%, 80%); }
+  to { opacity: 1; transform: translate(-50%, 50%); }
+}
+.scroll-hint .bob {
+  display: inline-block;
+  animation: bob 1.4s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Eyebrows + headings */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 12px 0 10px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+}
+.eyebrow i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0 0 4px rgba(228, 235, 41, 0.28);
+}
+.eyebrow.yellow { background: var(--yellow); }
+.eyebrow.yellow i { background: var(--ink); box-shadow: none; }
+.eyebrow.dark { background: var(--ink); color: #fff; }
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.section-head h2,
+.center-block h2,
+.center-title {
+  font-size: clamp(42px, 5vw, 72px);
+}
+.center-title { max-width: none; }
+.center-block { text-align: center; margin-bottom: 36px; }
+.center-block .eyebrow, .center-block h2 { margin-inline: auto; }
+.center-block .eyebrow { margin-bottom: 16px; }
+.lede { color: var(--muted); font-size: 16px; line-height: 1.55; margin: 18px 0 0; max-width: 460px; }
+
+.reveal { animation: none; }
+
+[data-anim] { animation-delay: var(--d, 0s); animation-play-state: paused; animation-fill-mode: forwards; }
+[data-anim].in { animation-play-state: running; }
+[data-anim].settled { animation: none; opacity: 1; filter: none; transform: none; }
+
+[data-anim="rise"] { opacity: 0; transform: translateY(52px); animation-name: riseIn; animation-duration: 0.9s; animation-timing-function: var(--ease); }
+[data-anim="left"] { opacity: 0; transform: translateX(-76px); animation-name: leftIn; animation-duration: 0.85s; animation-timing-function: var(--ease); }
+[data-anim="pop"],
+[data-anim="hero"] { opacity: 0; transform: translateY(26px) scale(0.86); animation-name: popIn; animation-duration: 0.85s; animation-timing-function: var(--ease); }
+[data-anim="step"] { opacity: 0; transform: translateX(-88px) scale(0.9); animation-name: stepIn; animation-duration: 0.9s; animation-timing-function: var(--ease); }
+[data-anim="from-right"] { opacity: 0; transform: translateX(110px) scale(0.96); animation-name: sideIn; animation-duration: 1s; animation-timing-function: var(--ease); }
+[data-anim="from-left"] { opacity: 0; transform: translateX(-110px) scale(0.96); animation-name: sideIn; animation-duration: 1s; animation-timing-function: var(--ease); }
+[data-anim="fade"] { opacity: 0; animation-name: fadeIn; animation-duration: 0.85s; animation-timing-function: var(--ease); }
+[data-anim="tilt"] { opacity: 0; transform: translate(40px, 72px) rotate(8deg); animation-name: tiltIn; animation-duration: 1.05s; animation-timing-function: var(--ease); }
+[data-anim="zoom"] { opacity: 0; transform: scale(0.9); animation-name: zoomIn; animation-duration: 1s; animation-timing-function: var(--ease); }
+[data-anim="ba"] { opacity: 0.6; transform: scale(0.4); animation-name: baIn; animation-duration: 0.9s; animation-timing-function: var(--ease); }
+[data-anim="zoom"].in video,
+[data-anim="zoom"].in img,
+[data-anim="rise"].in img.shot {
+  animation: imgSettle 1.15s var(--ease) both;
+}
+.shot img.settled,
+img.shot.settled,
+.video-frame video.settled,
+.hero-img.settled { animation: none; }
+.blog-card:hover .shot img.settled { transform: scale(1.08); }
+
+[data-anim="words"] .w { display: inline-block; }
+[data-anim="words"] .w > span {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(0.38em);
+  animation: wordIn 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-play-state: paused;
+  animation-delay: calc(var(--d, 0s) + var(--i, 0) * 0.048s);
+}
+[data-anim="words"].in .w > span { animation-play-state: running; }
+
+@keyframes riseIn { to { opacity: 1; transform: none; } }
+@keyframes leftIn { to { opacity: 1; transform: none; } }
+@keyframes popIn { to { opacity: 1; transform: none; } }
+@keyframes stepIn { to { opacity: 1; transform: none; } }
+@keyframes sideIn { to { opacity: 1; transform: none; } }
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes baIn { to { opacity: 1; transform: none; } }
+@keyframes tiltIn { to { opacity: 1; transform: none; } }
+@keyframes zoomIn { to { opacity: 1; transform: none; } }
+@keyframes imgSettle { from { transform: scale(1.16); } to { transform: none; } }
+@keyframes wordIn { to { opacity: 1; filter: blur(0); transform: none; } }
+@keyframes navDrop { from { opacity: 0; transform: translateY(-36px); } to { opacity: 1; transform: none; } }
+
+.btn.settled:hover { transform: translateY(-2px); }
+.hero-card.settled:hover { transform: translateY(-6px); }
+.step.settled:hover { transform: translateY(-6px); }
+.blog-card.settled:hover { transform: translateY(-8px); }
+.person.settled:hover, .member.settled:hover, .post.settled:hover, .award.settled:hover { transform: translateY(-6px); }
+.svc-page-card.settled:hover { transform: translateX(6px); }
+
+/* About */
+.about { padding: 92px 0 20px; }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+}
+.about h2 { font-size: clamp(36px, 3.4vw, 52px); max-width: 640px; }
+.video-frame {
+  border-radius: 28px;
+  overflow: hidden;
+  height: 420px;
+  background: #ddd;
+}
+.video-frame video, .video-frame img { width: 100%; height: 100%; object-fit: cover; }
+.trust {
+  margin-top: 54px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+.marquee {
+  margin-top: 22px;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: slide 32s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.brand {
+  width: 230px;
+  height: 150px;
+  border-radius: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.35);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.brand span {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-align: center;
+  line-height: 1.15;
+}
+
+/* Services */
+.shell {
+  margin: 18px 12px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+.shell.dark { background: #070708; color: #fff; }
+.shell.white { background: #fff; color: var(--ink); }
+.shell-pad { padding: 72px 0 64px; }
+.shell .section-head h2 { color: #fff; }
+.svc { display: flex; flex-direction: column; gap: 12px; }
+.svc-card {
+  position: relative;
+  border-radius: 32px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  overflow: hidden;
+  transition: background 0.45s var(--ease), border-color 0.45s ease;
+}
+.svc-card.open {
+  background: var(--card);
+  border-color: transparent;
+}
+.svc-bar {
+  width: 100%;
+  min-height: 76px;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: 48px 1fr 42px;
+  align-items: center;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.svc-card.open .svc-bar { display: none; }
+.svc-num {
+  color: #c5c5c5;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 18px;
+}
+.svc-bar h3 {
+  text-align: center;
+  font-size: 34px;
+}
+.svc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease);
+}
+.svc-card:not(.open) .svc-panel { visibility: hidden; }
+.svc-card.open .svc-panel { visibility: visible; grid-template-rows: 1fr; }
+.svc-panel-inner { overflow: hidden; }
+.svc-open {
+  display: grid;
+  grid-template-columns: 1fr 280px 1fr;
+  gap: 28px;
+  align-items: stretch;
+  padding: 32px 32px 22px;
+  min-height: 250px;
+}
+.svc-copy { display: flex; flex-direction: column; min-height: 190px; }
+.svc-copy .svc-num { margin-top: auto; }
+.svc-open h3 { font-size: 36px; margin-bottom: 10px; }
+.svc-open .desc { color: #bdbdbd; margin: 0; max-width: 280px; font-size: 15px; line-height: 1.45; }
+.svc-open img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 22px;
+  transform: scale(0.96);
+  opacity: 0;
+  transition: transform 0.6s var(--ease), opacity 0.6s ease;
+}
+.svc-card.open img { transform: none; opacity: 1; }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.checks li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+.checks li::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--yellow) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='%2309090b' stroke-width='2' d='M3 8.2 6.2 11.4 13 4.6'/></svg>") center / 12px no-repeat;
+  flex: 0 0 auto;
+}
+.checks.dark li::before {
+  background-color: var(--ink);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-width='2' d='M3 8.2 6.2 11.4 13 4.6'/></svg>");
+}
+.svc-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px 8px 4px;
+}
+.svc-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+}
+
+/* Process */
+.process-sec { padding: 88px 0 70px; }
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  position: relative;
+}
+.step {
+  background: #fff;
+  border-radius: 28px;
+  min-height: 340px;
+  padding: 22px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background 0.45s var(--ease), color 0.45s ease, transform 0.45s var(--ease);
+}
+.step:hover { transform: translateY(-6px); }
+.step.active { background: var(--ink); color: #fff; }
+.step-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  transition: background 0.45s var(--ease);
+}
+.step-icon svg { width: 28px; height: 28px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.step.active .step-icon { background: var(--yellow); }
+.step.active .step-icon svg { stroke: #09090b; }
+.step h3 { font-size: 30px; margin-bottom: 10px; }
+.step p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.45; transition: color 0.4s ease; }
+.step.active p { color: #d0d0d0; }
+.timeline {
+  margin-top: 28px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.16);
+}
+.tick {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 16px;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.4s var(--ease), color 0.4s ease, transform 0.4s var(--ease);
+}
+.tick.active { background: var(--ink); color: #fff; transform: scale(1.05); }
+
+/* Works */
+.works-sec { padding: 40px 0 20px; }
+.works-label {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.works-label::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: rgba(0, 0, 0, 0.12);
+}
+.work {
+  position: sticky;
+  top: 18px;
+  background: var(--bg);
+  padding-bottom: 28px;
+  transform-origin: center top;
+}
+.work-card { }
+.work-card img.shot {
+  width: 100%;
+  height: min(62vh, 620px);
+  object-fit: cover;
+  border-radius: 32px;
+}
+.work-meta {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 8px 0;
+}
+.dots { display: flex; gap: 6px; align-items: center; height: auto; margin-bottom: 14px; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; display: block; }
+.work-meta h3 { font-size: clamp(32px, 3vw, 48px); }
+.meta-row { display: flex; gap: 0; }
+.meta-row div {
+  padding: 0 28px;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+.meta-row div:first-child { border-left: 0; }
+.meta-row span { display: block; color: var(--soft); font-size: 13px; margin-bottom: 6px; }
+.meta-row strong { font-family: "Chakra Petch", sans-serif; font-weight: 500; font-size: 22px; }
+
+/* Benefits */
+.benefits { padding: 80px 0 40px; }
+.bento {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1.08fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
+.b-card {
+  background: #fff;
+  border-radius: 32px;
+  padding: 28px;
+  overflow: hidden;
+  min-height: 250px;
+}
+.b-premium {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  background: #161618;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+.b-premium p { color: #c8c8c8; }
+.b-premium img {
+  margin-top: auto;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+  height: 290px;
+  object-fit: cover;
+  object-position: center top;
+}
+.b-team { grid-column: 2; grid-row: 1; }
+.b-stats { grid-column: 2; grid-row: 2; text-align: center; }
+.b-why { grid-column: 3; grid-row: 1 / span 2; display: flex; flex-direction: column; gap: 18px; }
+.b-why video {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 24px;
+  background: #111;
+}
+.b-card h3, .b-card h4 { font-size: 32px; margin-bottom: 8px; }
+.team-photo {
+  margin-top: 16px;
+  height: 120px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+}
+.stars { display: flex; gap: 4px; justify-content: center; margin-bottom: 8px; }
+.stars i {
+  width: 16px;
+  height: 16px;
+  background: var(--yellow);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.stars i.dim { opacity: 0.28; }
+.avatars { display: flex; margin-top: 16px; }
+.avatars img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  margin-left: -8px;
+}
+.avatars img:first-child { margin-left: 0; }
+.logo-float {
+  position: relative;
+}
+.logo-float .mark {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  font-family: "Chakra Petch", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.04em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 8px 12px;
+  border-radius: 14px;
+  animation: pulse 2.8s ease-in-out infinite;
+}
+.b-why .cover {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 24px;
+  background: #111;
+}
+@keyframes pulse {
+  50% { transform: translate(-50%, -50%) scale(1.06); }
+}
+
+/* Pricing */
+.price-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+.price-tabs { display: flex; flex-direction: column; padding-top: 8px; }
+.price-tabs button {
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ddd;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 20px;
+  padding: 16px 16px;
+  cursor: pointer;
+  border-radius: 14px;
+  transition: background 0.35s var(--ease), color 0.35s ease;
+}
+.price-tabs button.active {
+  background: #2a2a2a;
+  color: #fff;
+  border-bottom-color: transparent;
+}
+.price-card {
+  background: var(--card);
+  border-radius: 36px;
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+}
+.price-card h3 { font-size: 40px; margin-bottom: 8px; }
+.price-card .desc { color: #c4c4c4; margin: 0 0 28px; max-width: 320px; }
+.price-card .amount {
+  font-size: clamp(48px, 5vw, 72px);
+  margin-bottom: 18px;
+}
+.price-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 22px;
+}
+.included { grid-column: 1 / -1; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 22px; }
+.included h4 { font-size: 20px; margin-bottom: 16px; font-weight: 500; }
+.included .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+
+/* Testimonials */
+.feedback { padding: 70px 0 50px; overflow: hidden; }
+.feedback h2 {
+  font-size: clamp(64px, 8vw, 140px);
+  text-align: center;
+  margin-bottom: 28px;
+}
+.slider-wrap {
+  display: grid;
+  grid-template-columns: 64px 1fr 64px;
+  gap: 16px;
+  align-items: center;
+}
+.arrow {
+  height: 220px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--yellow);
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.35s var(--ease), background 0.3s ease;
+}
+.arrow:hover { transform: scale(1.04); background: #000; }
+.arrow:disabled { opacity: 0.35; cursor: default; transform: none; }
+.viewport { overflow: hidden; }
+.track {
+  display: flex;
+  gap: 18px;
+  transition: transform 0.7s var(--ease);
+}
+.t-card {
+  flex: 0 0 calc(50% - 9px);
+  background: #fff;
+  border-radius: 32px;
+  padding: 22px 22px 18px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+.t-top { display: flex; gap: 14px; align-items: center; }
+.t-top img.avatar { width: 74px; height: 74px; border-radius: 50%; object-fit: cover; }
+.t-top h3 { font-size: 20px; letter-spacing: -0.02em; }
+.t-top p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.quote-mark { margin-left: auto; font-family: "Chakra Petch", sans-serif; font-size: 42px; line-height: 0.8; opacity: 0.35; }
+.t-brand { font-family: "Chakra Petch", sans-serif; font-weight: 600; letter-spacing: -0.03em; }
+.t-card blockquote {
+  margin: 18px 0;
+  padding: 16px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  flex: 1;
+}
+.t-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.t-foot .stars { margin-bottom: 0; }
+
+/* Before / after */
+.ba { padding: 8px 0 28px; }
+.ba-panel {
+  background: #fff;
+  border-radius: 40px;
+  padding: 48px 48px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.ba-panel h2 { max-width: 520px; }
+.ba-panel .section-head { align-items: center; }
+.ba-stage {
+  position: relative;
+  min-height: 460px;
+  display: grid;
+  place-items: center;
+}
+.ba-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(42%, 420px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  opacity: 0.16;
+  z-index: 1;
+  pointer-events: none;
+}
+.ba-logo svg { width: 100%; height: 100%; display: block; }
+.ba-car {
+  position: relative;
+  z-index: 2;
+  width: min(980px, 100%);
+  aspect-ratio: 2.4 / 1;
+  border-radius: 28px;
+  overflow: hidden;
+}
+.ba-car img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.ba-car .after {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.44, 0, 0.56, 1);
+}
+.ba-car.show-after .after { opacity: 1; }
+
+/* Blogs */
+.blogs { padding: 72px 0 30px; }
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.blog-card {
+  background: #fff;
+  border-radius: 32px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 460px;
+  transition: transform 0.45s var(--ease);
+}
+.blog-card:hover { transform: translateY(-8px); }
+.blog-card .shot {
+  height: 230px;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+.blog-card .shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+.blog-card:hover .shot img { transform: scale(1.08); }
+.blog-card .copy { padding: 16px 10px 8px; display: flex; flex-direction: column; flex: 1; }
+.blog-card .meta { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+.blog-card h3 { font-size: 24px; letter-spacing: -0.03em; line-height: 1.15; }
+.blog-card.flip { flex-direction: column-reverse; }
+.blog-card.flip .copy { padding-bottom: 16px; }
+#why .b-card,
+#blogs .blog-card {
+  transform: translate3d(var(--sx, 0px), 0, 0) scale(var(--ss, 1));
+  opacity: var(--so, 1);
+  transition: none;
+  z-index: 1;
+}
+#blogs .blog-card:hover {
+  transform: translate3d(var(--sx, 0px), -8px, 0) scale(var(--ss, 1));
+}
+
+/* Notch + footer */
+.footer-wrap { position: relative; margin: 28px 12px 12px; }
+.notch {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  background: var(--bg);
+  color: var(--ink);
+  border-radius: 0 0 22px 22px;
+  padding: 14px 28px 12px;
+  font-size: 14px;
+  z-index: 2;
+}
+.footer {
+  background: #070708;
+  color: #fff;
+  border-radius: 40px;
+  padding: 72px 0 28px;
+  overflow: hidden;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 28px;
+}
+.footer h3 { font-size: 48px; max-width: 320px; margin-bottom: 22px; }
+.footer h4 { font-size: 20px; margin: 0 0 12px; font-weight: 500; }
+.news-label { margin: 48px 0 10px; font-weight: 500; }
+.news {
+  display: flex;
+  align-items: center;
+  background: #1a1a1c;
+  border-radius: 999px;
+  padding: 6px 6px 6px 18px;
+  max-width: 340px;
+}
+.news input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  outline: none;
+  font-size: 15px;
+  min-width: 0;
+}
+.news button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 0;
+  background: #2a2a2c;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.35s var(--ease);
+}
+.news button:hover { background: var(--yellow); color: var(--ink); transform: rotate(-20deg); }
+.footer-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+}
+.footer a { color: #dedede; font-size: 15px; }
+.footer a:hover { color: var(--yellow); }
+.footer .btn,
+.footer .btn:hover { color: var(--ink); }
+.foot-block { padding: 8px 8px 8px 28px; border-left: 1px solid rgba(255, 255, 255, 0.1); }
+.foot-block + .more { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.loc { color: #cfcfcf; margin: 0 0 10px; font-size: 15px; }
+.socials { display: flex; gap: 10px; margin-top: 28px; }
+.socials a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  display: grid;
+  place-items: center;
+  transition: transform 0.35s var(--ease);
+}
+.socials a:hover { transform: translateY(-4px); }
+.socials svg { width: 16px; height: 16px; fill: currentColor; }
+.wordmark {
+  margin-top: 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  padding-top: 10px;
+}
+.wordmark-track {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  width: max-content;
+  animation: slide 22s linear infinite;
+}
+.wordmark-track span {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 84px;
+  line-height: 1;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.16);
+  letter-spacing: -0.05em;
+}
+.wordmark-track img { height: 110px; width: auto; opacity: 0.9; }
+.copy {
+  text-align: center;
+  color: #9a9a9a;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+.copy a { color: #fff; }
+
+/* Inner pages */
+.page-hero { padding: 28px 0 10px; }
+.page-hero h1 { font-size: clamp(48px, 6vw, 84px); max-width: 860px; }
+.page-hero .lede { margin-top: 16px; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+.stat {
+  background: #fff;
+  border-radius: 28px;
+  padding: 28px;
+}
+.stat strong {
+  display: block;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.panel {
+  background: #fff;
+  border-radius: 32px;
+  padding: 28px;
+}
+.timeline { display: grid; gap: 0; margin-top: 12px; }
+.tl {
+  display: grid;
+  grid-template-columns: 120px 24px 1fr;
+  gap: 18px;
+  padding: 8px 0 28px;
+}
+.tl-year {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 28px;
+}
+.tl-rail { position: relative; }
+.tl-rail::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  bottom: -28px;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.12);
+}
+.tl:last-child .tl-rail::before { display: none; }
+.tl-rail i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+.cards-4, .cards-3 { display: grid; gap: 16px; }
+.cards-4 { grid-template-columns: repeat(4, 1fr); }
+.cards-3 { grid-template-columns: repeat(3, 1fr); }
+.person, .award, .post, .member {
+  background: #fff;
+  border-radius: 28px;
+  overflow: hidden;
+  transition: transform 0.45s var(--ease);
+}
+.person:hover, .member:hover, .post:hover, .award:hover { transform: translateY(-6px); }
+.person img, .member img, .post img { width: 100%; height: 240px; object-fit: cover; }
+.person div, .member div, .award, .post div { padding: 16px 18px 20px; }
+.person h3, .member h3 { font-size: 22px; }
+.person p, .member p, .award p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+.faq { display: grid; gap: 10px; }
+.faq-item {
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+}
+.faq-item button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 20px 22px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.faq-item .a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease);
+}
+.faq-item.open .a { grid-template-rows: 1fr; }
+.faq-item .a p { overflow: hidden; margin: 0; padding: 0 22px 18px; color: var(--muted); }
+.plus { transition: transform 0.35s var(--ease); }
+.faq-item.open .plus { transform: rotate(45deg); }
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+.form input, .form textarea, .form select {
+  width: 100%;
+  border: 0;
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 16px 18px;
+  font-size: 15px;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+.form input:focus, .form textarea:focus, .form select:focus {
+  box-shadow: 0 0 0 2px var(--yellow);
+}
+.form textarea { min-height: 140px; resize: vertical; }
+.toast {
+  display: none;
+  margin-top: 10px;
+  color: var(--ink);
+  background: var(--yellow);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.toast.show { display: block; animation: rise 0.4s var(--ease); }
+
+.plans {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.plan {
+  background: var(--card);
+  color: #fff;
+  border-radius: 32px;
+  padding: 32px;
+}
+.plan h3 { font-size: 36px; }
+.plan .amount { font-size: 64px; margin: 16px 0; }
+a.hidden-card,
+.hidden-card { display: none; }
+a.svc-page-card.hidden-card.show { display: grid; animation: rise 0.5s var(--ease); }
+a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); }
+
+.miss {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 40px 20px 80px;
+}
+.miss h1 { font-size: clamp(100px, 18vw, 260px); }
+
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 28px; }
+.chip {
+  border: 0;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.chip.active { background: var(--ink); color: #fff; }
+
+.svc-page-card {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 22px;
+  align-items: center;
+  background: #fff;
+  border-radius: 28px;
+  padding: 16px;
+  margin-bottom: 14px;
+  transition: transform 0.4s var(--ease);
+}
+.svc-page-card:hover { transform: translateX(6px); }
+.svc-page-card img { width: 180px; height: 120px; object-fit: cover; border-radius: 18px; }
+.article { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: start; }
+.article img.hero-img { width: 100%; height: 460px; object-fit: cover; border-radius: 32px; }
+.prose p { color: var(--muted); font-size: 17px; line-height: 1.7; }
+
+@media (max-width: 1100px) {
+  .about-grid, .price-layout, .price-card, .bento, .article, .plans, .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .b-premium, .b-why, .b-team, .b-stats { grid-row: auto; grid-column: auto; }
+  .svc-open { grid-template-columns: 1fr; }
+  .steps, .timeline, .blog-grid, .cards-4, .cards-3, .stats { grid-template-columns: 1fr 1fr; }
+  .t-card { flex-basis: 100%; }
+  .slider-wrap { grid-template-columns: 48px 1fr 48px; }
+  .hero h1 { font-size: clamp(64px, 12vw, 120px); }
+  .work { position: relative; top: auto; }
+}
+@media (max-width: 780px) {
+  .wrap { width: min(100% - 32px, var(--max)); }
+  .nav-links { 
+    display: none;
+    position: absolute;
+    top: 78px;
+    left: 16px;
+    right: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    background: rgba(12, 12, 14, 0.96);
+    border-radius: 24px;
+    padding: 12px;
+  }
+  .nav { position: relative; width: 100%; }
+  .nav.open .nav-links { display: flex; }
+  .nav .btn.desktop-cta { display: none; }
+  .burger { display: inline-block; }
+  .drop-menu { position: static; translate: none; transform: none; opacity: 1; pointer-events: auto; display: none; box-shadow: none; }
+  .drop.open .drop-menu { display: block; }
+  .hero { margin: 8px; min-height: 0; height: auto; border-radius: 24px; }
+  .hero-bottom { position: relative; left: auto; right: auto; bottom: auto; flex-direction: column; align-items: flex-start; padding: 42vh 16px 28px; }
+  .hero h1 { font-size: 64px; }
+  .hero-card { min-width: 0; width: 100%; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .section-head h2, .center-block h2, .center-title { font-size: clamp(34px, 9vw, 48px); }
+  .feedback h2 { font-size: clamp(40px, 12vw, 64px); }
+  .steps, .timeline, .blog-grid, .cards-4, .cards-3, .stats, .svc-page-card { grid-template-columns: 1fr; }
+  .step { min-height: 0; }
+  .work-meta { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .meta-row { flex-wrap: wrap; width: 100%; }
+  .meta-row div { padding: 0 18px 0 0; border-left: 0; }
+  .work-card img.shot { height: 240px; border-radius: 24px; }
+  .price-card { padding: 22px; }
+  .price-card h3 { font-size: 32px; }
+  .slider-wrap { grid-template-columns: 40px 1fr 40px; gap: 8px; }
+  .arrow { height: 120px; }
+  .shell { margin: 12px 8px; border-radius: 28px; }
+  .shell-pad { padding: 48px 0 36px; }
+  .b-card { min-height: 0; }
+  .blog-card { min-height: 0; }
+  .ba-stage { min-height: 0; }
+  .ba-panel { padding: 24px 16px 12px; }
+  .foot-block { padding: 0; border-left: 0; }
+  .footer { border-radius: 28px; }
+  .footer h3 { font-size: 32px; }
+  .wordmark-track span { font-size: 48px; }
+  .scroll-hint { font-size: 13px; }
+  .video-frame { height: 240px; }
+}
+
+.view { display: none; }
+.view.active { display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal,
+  [data-anim],
+  [data-anim="words"] .w > span {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+}
+
+</style>
+</head>
+<body class="home" data-page="home">
+<div id="nav-slot" class="nav-slot"></div>
+<div class="view active" data-page="home">
+<header class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=2000&q=80" alt="" />
+      <img class="alt" src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=2000&q=80" alt="" />
+    </div>
+    <div class="hero-shade"></div>
+    <div class="hero-bottom">
+      <h1>Car Care</h1>
+      <a class="hero-card" href="tel:+15552840196">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="DMzCarCare specialist" />
+        <div>
+          <p>Book your detail</p>
+          <strong>+1 555 284 0196</strong>
+        </div>
+      </a>
+    </div>
+    <a class="scroll-hint" href="#about">Scroll for more <span class="bob">⌄</span></a>
+  </header>
+
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="eyebrow"><i></i> About us</span>
+        <h2 style="margin-top:18px">DMzCarCare washing and detailing for a cleaner, fresher, spotless ride.</h2>
+        <p class="lede">From a quick wash to a full detail, DMzCarCare uses careful products and a steady hand so your car leaves ready for the road.</p>
+        <div style="margin-top:22px"><a class="btn btn-dark" href="#/contact"><span class="btn-text"><span>Contact now</span><span>Contact now</span></span></a></div>
+      </div>
+      <div class="video-frame reveal">
+        <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1600&q=80" alt="Detailing at DMzCarCare" />
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="trust">Drivers trust DMzCarCare with every finish</p>
+      <div class="marquee" data-brands></div>
+    </div>
+  </section>
+
+  <section class="shell dark" id="services">
+    <div class="wrap shell-pad">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow yellow"><i></i> Our services</span>
+          <h2 style="margin-top:18px">Complete car wash services</h2>
+        </div>
+        <a class="btn btn-white btn-sm" href="#/services"><span class="btn-text"><span>View all services</span><span>View all services</span></span></a>
+      </div>
+      <div class="svc">
+        <article class="svc-card open" data-svc>
+          <button class="svc-bar" type="button" data-svc-toggle>
+            <span class="svc-num">01</span>
+            <h3>Basic car wash</h3>
+            <span class="icon-btn" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-panel">
+            <div class="svc-panel-inner">
+              <div class="svc-open">
+                <div class="svc-copy">
+                  <h3>Basic car wash</h3>
+                  <p class="desc">Quick exterior cleaning to remove dirt, dust, and everyday road grime.</p>
+                  <span class="svc-num">01</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1400&q=80" alt="Basic car wash" />
+                <ul class="checks">
+                  <li>Quick exterior cleaning</li>
+                  <li>Everyday dirt removal</li>
+                  <li>Fresh clean finish</li>
+                  <li>Fast car refresh</li>
+                </ul>
+              </div>
+              <div class="svc-foot">
+                <button class="icon-btn svc-close" type="button" data-svc-toggle aria-label="Close">×</button>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="svc-card" data-svc>
+          <button class="svc-bar" type="button" data-svc-toggle>
+            <span class="svc-num">02</span>
+            <h3>Premium car wash</h3>
+            <span class="icon-btn" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-panel"><div class="svc-panel-inner">
+            <div class="svc-open">
+              <div class="svc-copy">
+                <h3>Premium car wash</h3>
+                <p class="desc">Deep exterior cleaning for a brighter shine and polished finish.</p>
+                <span class="svc-num">02</span>
+              </div>
+              <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1400&q=80" alt="Premium car wash" />
+              <ul class="checks">
+                <li>Deep exterior cleaning</li>
+                <li>High gloss finish</li>
+                <li>Premium surface care</li>
+                <li>Long lasting shine</li>
+              </ul>
+            </div>
+            <div class="svc-foot"><button class="icon-btn svc-close" type="button" data-svc-toggle aria-label="Close">×</button></div>
+          </div></div>
+        </article>
+        <article class="svc-card" data-svc>
+          <button class="svc-bar" type="button" data-svc-toggle>
+            <span class="svc-num">03</span>
+            <h3>Interior car wash</h3>
+            <span class="icon-btn" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-panel"><div class="svc-panel-inner">
+            <div class="svc-open">
+              <div class="svc-copy">
+                <h3>Interior car wash</h3>
+                <p class="desc">Thorough interior cleaning to keep your cabin fresh, clean, and comfortable.</p>
+                <span class="svc-num">03</span>
+              </div>
+              <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1400&q=80" alt="Interior car wash" />
+              <ul class="checks">
+                <li>Deep seat cleaning</li>
+                <li>Complete floor cleaning</li>
+                <li>Dashboard surface care</li>
+                <li>Fresh interior finish</li>
+              </ul>
+            </div>
+            <div class="svc-foot"><button class="icon-btn svc-close" type="button" data-svc-toggle aria-label="Close">×</button></div>
+          </div></div>
+        </article>
+        <article class="svc-card" data-svc>
+          <button class="svc-bar" type="button" data-svc-toggle>
+            <span class="svc-num">04</span>
+            <h3>Full car detail</h3>
+            <span class="icon-btn" aria-hidden="true">+</span>
+          </button>
+          <div class="svc-panel"><div class="svc-panel-inner">
+            <div class="svc-open">
+              <div class="svc-copy">
+                <h3>Full car detail</h3>
+                <p class="desc">Complete interior and exterior care for a spotless, refreshed vehicle.</p>
+                <span class="svc-num">04</span>
+              </div>
+              <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1400&q=80" alt="Full car detail" />
+              <ul class="checks">
+                <li>Complete exterior care</li>
+                <li>Deep interior cleaning</li>
+                <li>Detailed surface treatment</li>
+                <li>Spotless finish inside</li>
+              </ul>
+            </div>
+            <div class="svc-foot"><button class="icon-btn svc-close" type="button" data-svc-toggle aria-label="Close">×</button></div>
+          </div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="process-sec" id="process">
+    <div class="wrap">
+      <div class="center-block reveal">
+        <span class="eyebrow"><i></i> Our process</span>
+        <h2 class="center-title">Simple car wash process</h2>
+      </div>
+      <div class="steps">
+        <article class="step active" data-step>
+          <div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></div>
+          <div><h3>Book wash</h3><p>Choose your preferred wash service and schedule a convenient time for your car.</p></div>
+        </article>
+        <article class="step" data-step>
+          <div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 19h8M9 19c0-4 1.2-6 3-9 1.8 3 3 5 3 9"/><path d="M12 4c.6 1.4 1.2 2.4 1.2 3.4a1.2 1.2 0 1 1-2.4 0C10.8 6.4 11.4 5.4 12 4z"/></svg></div>
+          <div><h3>Start cleaning</h3><p>Our team carefully washes your car using quality products and proper techniques.</p></div>
+        </article>
+        <article class="step" data-step>
+          <div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.2 17 19 7"/></svg></div>
+          <div><h3>Final check</h3><p>We inspect every area carefully to make sure your car looks clean and fresh.</p></div>
+        </article>
+        <article class="step" data-step>
+          <div class="step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16h18M6 16l1.4-4.2A2 2 0 0 1 9.3 10h5.4a2 2 0 0 1 1.9 1.8L18 16"/><path d="M7 16v1.5M17 16v1.5"/><circle cx="7.2" cy="16" r="1.6"/><circle cx="16.8" cy="16" r="1.6"/></svg></div>
+          <div><h3>Drive fresh</h3><p>Freshly washed, your car shines brightly, looking clean, polished, and road-ready.</p></div>
+        </article>
+      </div>
+      <div class="timeline">
+        <button class="tick active" type="button" data-tick>01</button>
+        <button class="tick" type="button" data-tick>02</button>
+        <button class="tick" type="button" data-tick>03</button>
+        <button class="tick" type="button" data-tick>04</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="works-sec" id="works">
+    <div class="wrap">
+      <div class="works-label">Recent Works</div>
+      <article class="work">
+        <div class="work-card">
+          <img class="shot" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=80" alt="Luxury car detailing" />
+          <div class="work-meta">
+            <div>
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <h3>Luxury car detailing</h3>
+            </div>
+            <div class="meta-row">
+              <div><span>Service</span><strong>Full car detailing</strong></div>
+              <div><span>Year</span><strong>2026</strong></div>
+              <div><span>Vehicle</span><strong>Sedan</strong></div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="work">
+        <div class="work-card">
+          <img class="shot" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1800&q=80" alt="Wash and polish" />
+          <div class="work-meta">
+            <div>
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <h3>Wash &amp; polish</h3>
+            </div>
+            <div class="meta-row">
+              <div><span>Service</span><strong>Full car detailing</strong></div>
+              <div><span>Year</span><strong>2025</strong></div>
+              <div><span>Vehicle</span><strong>SUV</strong></div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="work">
+        <div class="work-card">
+          <img class="shot" src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1800&q=80" alt="Luxury car detailing" />
+          <div class="work-meta">
+            <div>
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <h3>Luxury car detailing</h3>
+            </div>
+            <div class="meta-row">
+              <div><span>Service</span><strong>Full detailing</strong></div>
+              <div><span>Year</span><strong>2026</strong></div>
+              <div><span>Vehicle</span><strong>Sedan</strong></div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="benefits" id="why">
+    <div class="wrap">
+      <div class="center-block reveal">
+        <span class="eyebrow"><i></i> Why Choose us</span>
+        <h2 class="center-title">Better care for your car</h2>
+      </div>
+      <div class="bento">
+        <article class="b-card b-premium reveal">
+          <h3>Premium car care</h3>
+          <p>Professional washing and detailing that keeps your car clean fresh and ready for every drive.</p>
+          <div style="margin-top:18px"><a class="btn" href="#/contact"><span class="btn-text"><span>Book a service</span><span>Book a service</span></span></a></div>
+          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80" alt="Freshly detailed yellow car" />
+        </article>
+        <article class="b-card b-team reveal">
+          <h4 style="text-align:center">Skilled car team</h4>
+          <p class="lede" style="margin:8px auto 0;text-align:center">Trained technicians deliver careful cleaning, quality service, and a spotless finish for every car.</p>
+          <img class="team-photo" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80" alt="Car care team" />
+        </article>
+        <article class="b-card b-why reveal">
+          <div class="logo-float">
+            <img class="cover" src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1400&q=80" alt="DMzCarCare detailing bay" />
+            <span class="mark">DMz</span>
+          </div>
+          <h4>Why choose</h4>
+          <ul class="checks dark">
+            <li>Professional care for every vehicle</li>
+            <li>Premium products for better results</li>
+            <li>Skilled technicians with proven experience</li>
+            <li>Spotless finishes you can trust</li>
+          </ul>
+        </article>
+        <article class="b-card b-stats reveal">
+          <div class="stars">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i class="dim"></i>
+          </div>
+          <h4>1500+ Cars washed</h4>
+          <p class="lede" style="margin:8px auto 0">Professional car care trusted by drivers who want a spotless finish every time.</p>
+          <div class="avatars" style="justify-content:center">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=700&q=80" alt="" />
+            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&q=80" alt="" />
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80" alt="" />
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80" alt="" />
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell dark" id="pricing">
+    <div class="wrap shell-pad" data-pricing>
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow yellow"><i></i> Wash plans</span>
+          <h2 style="margin-top:18px">Simple pricing for every car</h2>
+        </div>
+        <a class="btn btn-white btn-sm" href="#/contact"><span class="btn-text"><span>Contact now</span><span>Contact now</span></span></a>
+      </div>
+      <div class="price-layout">
+        <div class="price-tabs">
+          <button class="active" type="button" data-plan="sedan">01. Sedan cars</button>
+          <button type="button" data-plan="suv">02. SUV cars</button>
+          <button type="button" data-plan="truck">03. Truck</button>
+          <button type="button" data-plan="luxury">04. Luxury car</button>
+        </div>
+        <article class="price-card">
+          <div>
+            <h3 data-title>Premium wash</h3>
+            <p class="desc" data-desc>A complete wash focused on keeping your car clean, fresh, and polished.</p>
+            <div class="amount" data-amount>$149 USD</div>
+            <a class="btn" href="#/contact"><span class="btn-text"><span>Book now</span><span>Book now</span></span></a>
+          </div>
+          <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1400&q=80" alt="Premium wash" />
+          <div class="included">
+            <h4>What's included:</h4>
+            <ul class="checks cols">
+              <li>Exterior wash</li>
+              <li>Dashboard cleaning</li>
+              <li>Interior vacuum</li>
+              <li>Hand drying</li>
+              <li>Tire cleaning</li>
+              <li>Wheel cleaning</li>
+              <li>Window cleaning</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="feedback" id="feedback">
+    <div class="wrap">
+      <h2 class="reveal">Real feedback</h2>
+      <div class="slider-wrap" data-slider>
+        <button class="arrow" type="button" data-prev aria-label="Previous">‹</button>
+        <div class="viewport">
+          <div class="track">
+            <article class="t-card">
+              <div class="t-top">
+                <img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt="Alex Morgan" />
+                <div><h3>Alex Morgan</h3><p>Car owner &amp; entrepreneur</p></div>
+                <span class="quote-mark" aria-hidden="true">”</span>
+              </div>
+              <blockquote>"My car looked brand new after their fast, professional wash and excellent care."</blockquote>
+              <div class="t-foot">
+                <span class="t-brand">DMz</span>
+                <div class="stars"><i></i><i></i><i></i><i></i><i class="dim"></i></div>
+              </div>
+            </article>
+            <article class="t-card">
+              <div class="t-top">
+                <img class="avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" alt="Emily Carter" />
+                <div><h3>Emily Carter</h3><p>Car owner &amp; designer</p></div>
+                <span class="quote-mark" aria-hidden="true">”</span>
+              </div>
+              <blockquote>“They made my car spotless. Fast service, careful work, amazing finish.”</blockquote>
+              <div class="t-foot">
+                <span class="t-brand">DMz</span>
+                <div class="stars"><i></i><i></i><i></i><i></i><i class="dim"></i></div>
+              </div>
+            </article>
+            <article class="t-card">
+              <div class="t-top">
+                <img class="avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=80" alt="James Wilson" />
+                <div><h3>James Wilson</h3><p>Automotive Designer</p></div>
+                <span class="quote-mark" aria-hidden="true">”</span>
+              </div>
+              <blockquote>"Excellent service with spotless results and impressive attention to detail."</blockquote>
+              <div class="t-foot">
+                <span class="t-brand">DMz</span>
+                <div class="stars"><i></i><i></i><i></i><i></i><i class="dim"></i></div>
+              </div>
+            </article>
+            <article class="t-card">
+              <div class="t-top">
+                <img class="avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt="Daniel Carter" />
+                <div><h3>Daniel Carter</h3><p>Car Owner &amp; Collector</p></div>
+                <span class="quote-mark" aria-hidden="true">”</span>
+              </div>
+              <blockquote>"Professional cleaning, careful attention, and an outstanding final finish."</blockquote>
+              <div class="t-foot">
+                <span class="t-brand">DMz</span>
+                <div class="stars"><i></i><i></i><i></i><i></i><i class="dim"></i></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="arrow" type="button" data-next aria-label="Next">›</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="ba" id="difference">
+    <div class="wrap">
+      <div class="ba-panel reveal">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow dark"><i></i> Before &amp; after</span>
+            <h2 style="margin-top:16px">See the clean difference</h2>
+          </div>
+          <a class="btn btn-dark btn-sm" href="#/contact"><span class="btn-text"><span>Contact now</span><span>Contact now</span></span></a>
+        </div>
+        <div style="height:1px;background:rgba(0,0,0,.08);margin-top:-8px"></div>
+        <div class="ba-stage" data-anim="ba">
+          <div class="ba-logo" aria-hidden="true">
+            <svg viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="78" fill="none" stroke="#09090b" stroke-width="1.5"></circle>
+              <circle cx="100" cy="100" r="62" fill="none" stroke="#09090b" stroke-width="6"></circle>
+              <text x="100" y="108" text-anchor="middle" font-family="Chakra Petch, sans-serif" font-size="28" font-weight="700" fill="#09090b">DMz</text>
+            </svg>
+          </div>
+          <div class="ba-car">
+            <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1800&q=80" alt="Car before detailing" />
+            <img class="after" src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1800&q=80" alt="Car after detailing" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blogs" id="blogs">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow"><i></i> Our blogs</span>
+          <h2 style="margin-top:16px">Tips for a cleaner car ride</h2>
+        </div>
+        <a class="btn btn-dark btn-sm" href="#/blogs"><span class="btn-text"><span>View all blogs</span><span>View all blogs</span></span></a>
+      </div>
+      <div class="blog-grid">
+        <a class="blog-card" href="#/blog">
+          <div class="shot"><img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1400&q=80" alt="" /></div>
+          <div class="copy">
+            <div class="meta">Alex Morgan — January 11, 2026</div>
+            <h3>5 Simple Ways To Keep Your Car Clean And Fresh Daily</h3>
+            <span class="icon-btn dark" style="margin-top:auto">→</span>
+          </div>
+        </a>
+        <a class="blog-card flip" href="#/blog">
+          <div class="shot"><img src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1400&q=80" alt="" /></div>
+          <div class="copy">
+            <div class="meta">Emma Carter — February 22, 2026</div>
+            <h3>How Often Should You Wash Your Car To Keep Paint Fresh</h3>
+            <span class="icon-btn dark" style="margin-top:16px">→</span>
+          </div>
+        </a>
+        <a class="blog-card" href="#/blog">
+          <div class="shot"><img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1400&q=80" alt="" /></div>
+          <div class="copy">
+            <div class="meta">James Wilson — March 23, 2026</div>
+            <h3>Why Professional Car Washing Benefits Your Vehicle</h3>
+            <span class="icon-btn dark" style="margin-top:auto">→</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="view" data-page="about">
+<main class="wrap page-hero">
+    <span class="eyebrow"><i></i> About us</span>
+    <h1 style="margin-top:16px">DMzCarCare makes every car look its best</h1>
+    <p class="lede">DMzCarCare started with a simple idea: every car deserves a careful wash, a proper detail, and a finish you can see.</p>
+    <div class="stats">
+      <div class="stat reveal"><strong>500+</strong><p class="lede">Cars washed</p></div>
+      <div class="stat reveal"><strong>98%</strong><p class="lede">Happy customers</p></div>
+      <div class="stat reveal"><strong>250+</strong><p class="lede">Cars detailed weekly</p></div>
+    </div>
+  </main>
+
+  <section class="wrap" style="padding:48px 0">
+    <div class="about-grid">
+      <div class="video-frame reveal">
+        <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1600&q=80" alt="Detailing at DMzCarCare" />
+      </div>
+      <div class="reveal">
+        <span class="eyebrow"><i></i> Our story</span>
+        <h2 style="margin-top:14px;font-size:48px">Built around better car care</h2>
+        <div class="timeline">
+          <article class="tl"><div class="tl-year">2018</div><div class="tl-rail"><i></i></div><div><h3>A fresh start</h3><p class="lede">We started with one simple goal: provide every car with the care, quality, and attention it deserves.</p></div></article>
+          <article class="tl"><div class="tl-year">2021</div><div class="tl-rail"><i></i></div><div><h3>Growing together</h3><p class="lede">From the beginning, we focused on reliable service and making every customer feel confident choosing us.</p></div></article>
+          <article class="tl"><div class="tl-year">2023</div><div class="tl-rail"><i></i></div><div><h3>Better car care</h3><p class="lede">Positive experiences and recommendations built a reputation based on quality, consistency, and genuine care.</p></div></article>
+          <article class="tl"><div class="tl-year">2026</div><div class="tl-rail"><i></i></div><div><h3>Made for drivers</h3><p class="lede">From everyday cleaning to premium care, we use thoughtful techniques and professional standards.</p></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:40px">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow"><i></i> Our Team</span>
+        <h2 style="margin-top:12px">Meet the people behind us</h2>
+      </div>
+      <a class="btn btn-dark btn-sm" href="#/teams"><span class="btn-text"><span>View all members</span><span>View all members</span></span></a>
+    </div>
+    <div class="cards-4">
+      <article class="person"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Ethan Brooks</h3><p>Car Wash Manager</p></div></article>
+      <article class="person"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Liam Carter</h3><p>Detailing Expert</p></div></article>
+      <article class="person"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Noah Bennett</h3><p>Customer Manager</p></div></article>
+      <article class="person"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Olivia Parker</h3><p>Service Advisor</p></div></article>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:48px">
+    <span class="eyebrow"><i></i> Quality Awards</span>
+    <div class="cards-4" style="margin-top:18px">
+      <article class="award"><h3>Best car wash service award</h3><p>Achievement: Customer choice</p><p>Year: 2025</p></article>
+      <article class="award"><h3>Top quality car care award</h3><p>Achievement: Service excellence</p><p>Year: 2024</p></article>
+      <article class="award"><h3>Trusted local car wash award</h3><p>Achievement: Quality recognition</p><p>Year: 2026</p></article>
+      <article class="award"><h3>Premium auto care service award</h3><p>Achievement: Customer Recognition</p><p>Year: 2022</p></article>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:60px">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow"><i></i> FAQs</span>
+        <h2 style="margin-top:12px">Answers to common questions</h2>
+      </div>
+      <a class="btn btn-sm" href="#/contact"><span class="btn-text"><span>Ask a question</span><span>Ask a question</span></span></a>
+    </div>
+    <div class="faq">
+      <article class="faq-item open" data-faq><button type="button">How long does a car wash take? <span class="plus">+</span></button><div class="a"><p>A standard car wash usually takes around 30–60 minutes, depending on the service you choose and the condition of your vehicle.</p></div></article>
+      <article class="faq-item" data-faq><button type="button">Do I need an appointment? <span class="plus">+</span></button><div class="a"><p>Appointments are recommended for quick, convenient service. Walk-ins are welcome whenever the schedule allows.</p></div></article>
+      <article class="faq-item" data-faq><button type="button">What wash services do you offer? <span class="plus">+</span></button><div class="a"><p>Basic wash, premium wash, interior cleaning, full detailing, ceramic coating, and window tint.</p></div></article>
+      <article class="faq-item" data-faq><button type="button">Do you offer mobile car washing? <span class="plus">+</span></button><div class="a"><p>Yes. We bring professional cleaning and detailing to your home, workplace, or preferred location.</p></div></article>
+    </div>
+  </section>
+</div>
+<div class="view" data-page="services">
+<main class="wrap page-hero">
+    <span class="eyebrow"><i></i> Our services</span>
+    <h1 style="margin-top:16px">Professional car care for every ride</h1>
+  </main>
+  <section class="wrap" style="padding:28px 0 40px">
+    <a class="svc-page-card" href="#/service">
+      <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1400&q=80" alt="">
+      <div><h3>01 Basic car wash</h3><p class="lede">Quick exterior cleaning to remove dirt, dust, and everyday road grime.</p></div>
+      <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
+    </a>
+    <a class="svc-page-card" href="#/service">
+      <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1400&q=80" alt="">
+      <div><h3>02 Premium car wash</h3><p class="lede">Deep exterior cleaning for a brighter shine and polished finish.</p></div>
+      <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
+    </a>
+    <a class="svc-page-card" href="#/service">
+      <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1400&q=80" alt="">
+      <div><h3>03 Interior car wash</h3><p class="lede">Thorough interior cleaning to keep your cabin fresh, clean, and comfortable.</p></div>
+      <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
+    </a>
+    <a class="svc-page-card" href="#/service">
+      <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1400&q=80" alt="">
+      <div><h3>04 Full car detail</h3><p class="lede">Complete interior and exterior care for a spotless, refreshed vehicle.</p></div>
+      <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
+    </a>
+    <a class="svc-page-card hidden-card" data-extra href="#/service">
+      <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1400&q=80" alt="">
+      <div><h3>05 Ceramic coating</h3><p class="lede">Protective coating designed to add shine and lasting surface protection.</p></div>
+      <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
+    </a>
+    <a class="svc-page-card hidden-card" data-extra href="#/service">
+      <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1800&q=80" alt="">
+      <div><h3>06 Window tint</h3><p class="lede">Professional window tinting for comfort, privacy, and UV protection.</p></div>
+      <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
+    </a>
+    <div style="text-align:center;margin-top:10px"><button class="btn btn-dark" type="button" data-more="[data-extra]"><span class="btn-text"><span>Load More</span><span>Load More</span></span></button></div>
+  </section>
+  <section class="feedback">
+    <div class="wrap">
+      <h2>Real feedback</h2>
+      <div class="slider-wrap" data-slider>
+        <button class="arrow" type="button" data-prev aria-label="Previous">‹</button>
+        <div class="viewport"><div class="track">
+          <article class="t-card"><div class="t-top"><img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Alex Morgan</h3><p>Car owner &amp; entrepreneur</p></div></div><blockquote>"My car looked brand new after their fast, professional wash and excellent care."</blockquote></article>
+          <article class="t-card"><div class="t-top"><img class="avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Emily Carter</h3><p>Car owner &amp; designer</p></div></div><blockquote>“They made my car spotless. Fast service, careful work, amazing finish.”</blockquote></article>
+          <article class="t-card"><div class="t-top"><img class="avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>James Wilson</h3><p>Automotive Designer</p></div></div><blockquote>"Excellent service with spotless results and impressive attention to detail."</blockquote></article>
+          <article class="t-card"><div class="t-top"><img class="avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Daniel Carter</h3><p>Car Owner &amp; Collector</p></div></div><blockquote>"Professional cleaning, careful attention, and an outstanding final finish."</blockquote></article>
+        </div></div>
+        <button class="arrow" type="button" data-next aria-label="Next">›</button>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="view" data-page="service">
+<main class="wrap page-hero article">
+    <div>
+      <span class="eyebrow"><i></i> Service details</span>
+      <h1 style="margin-top:16px">Basic car wash</h1>
+      <p class="lede">Quick exterior cleaning to remove dirt, dust, and everyday road grime. A fast refresh that leaves paint brighter and ready for the road.</p>
+      <ul class="checks dark" style="margin:22px 0">
+        <li>Quick exterior cleaning</li>
+        <li>Everyday dirt removal</li>
+        <li>Fresh clean finish</li>
+        <li>Fast car refresh</li>
+      </ul>
+      <a class="btn" href="#/contact"><span class="btn-text"><span>Book this wash</span><span>Book this wash</span></span></a>
+    </div>
+    <img class="hero-img" src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1400&q=80" alt="Basic car wash" />
+  </main>
+  <section class="wrap" style="padding:10px 0 70px">
+    <div class="plans">
+      <article class="plan"><h3>Express</h3><p class="lede" style="color:#ccc">About 30 minutes. Exterior only.</p><div class="amount">$89</div></article>
+      <article class="plan"><h3>With interior</h3><p class="lede" style="color:#ccc">Add vacuum and wipe-down.</p><div class="amount">$129</div></article>
+    </div>
+  </section>
+</div>
+<div class="view" data-page="pricing">
+<main class="wrap page-hero">
+    <span class="eyebrow"><i></i> Simple Pricing</span>
+    <h1 style="margin-top:16px">Choose The Perfect Car Care Plan</h1>
+    <div class="filter-row" data-filter>
+      <button class="chip active" type="button" data-filter="all">All</button>
+      <button class="chip" type="button" data-filter="sedan">Sedan</button>
+      <button class="chip" type="button" data-filter="suv">SUV</button>
+      <button class="chip" type="button" data-filter="truck">Truck</button>
+      <button class="chip" type="button" data-filter="luxury">Luxury car</button>
+    </div>
+    <div class="plans">
+      <article class="plan" data-kind="sedan suv truck luxury">
+        <h3>Express wash</h3>
+        <p class="lede" style="color:#ccc">A quick and reliable car wash for keeping your vehicle clean and fresh.</p>
+        <div class="amount">$89 USD</div>
+        <a class="btn" href="#/contact"><span class="btn-text"><span>Book now</span><span>Book now</span></span></a>
+        <h4 style="margin-top:28px">What's included:</h4>
+        <ul class="checks"><li>Foam pre-wash</li><li>Exterior hand wash</li><li>Bug removal</li><li>Mud removal</li><li>Rim polishing</li><li>Tire shine</li><li>Glass rinse</li></ul>
+      </article>
+      <article class="plan" data-kind="sedan suv truck luxury">
+        <h3>Premium wash</h3>
+        <p class="lede" style="color:#ccc">A complete wash focused on keeping your car clean, fresh, and polished.</p>
+        <div class="amount">$149 USD</div>
+        <a class="btn" href="#/contact"><span class="btn-text"><span>Book now</span><span>Book now</span></span></a>
+        <h4 style="margin-top:28px">What's included:</h4>
+        <ul class="checks"><li>Exterior wash</li><li>Interior vacuum</li><li>Tire cleaning</li><li>Window cleaning</li><li>Dashboard cleaning</li><li>Hand drying</li><li>Wheel cleaning</li></ul>
+      </article>
+    </div>
+  </main>
+  <div style="height:48px"></div>
+</div>
+<div class="view" data-page="teams">
+<main class="wrap page-hero">
+    <span class="eyebrow"><i></i> Our team</span>
+    <h1 style="margin-top:16px">Meet Our Car Care Team</h1>
+    <p class="lede">Our skilled team is dedicated to keeping your vehicle clean, fresh, and well maintained with reliable car care services.</p>
+    <div style="margin-top:20px"><a class="btn btn-dark" href="#/contact"><span class="btn-text"><span>Contact our team</span><span>Contact our team</span></span></a></div>
+    <div class="cards-4" style="margin-top:36px">
+      <article class="member"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Ethan Brooks</h3><p>Car Wash Manager</p></div></article>
+      <article class="member"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Olivia Morgan</h3><p>Wash Specialist</p></div></article>
+      <article class="member"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>James Wilson</h3><p>Detailing Expert</p></div></article>
+      <article class="member"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Daniel Carter</h3><p>Customer Manager</p></div></article>
+      <article class="member"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Ava Mitchell</h3><p>Customer Manager</p></div></article>
+      <article class="member"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Noah Parker</h3><p>Car Wash Manager</p></div></article>
+      <article class="member"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Mason Taylor</h3><p>Detailing Expert</p></div></article>
+      <article class="member"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80" alt=""><div><h3>Chloe Taylor</h3><p>Service Advisor</p></div></article>
+    </div>
+  </main>
+  <div style="height:40px"></div>
+</div>
+<div class="view" data-page="blogs">
+<main class="wrap page-hero">
+    <span class="eyebrow"><i></i> Our blogs</span>
+    <h1 style="margin-top:16px">Car care tips for a cleaner vehicle</h1>
+    <form class="news" data-news style="margin-top:22px;background:#fff">
+      <input type="email" required placeholder="Subscribe for car care tips" aria-label="Newsletter" style="color:#09090b" />
+      <button type="submit" aria-label="Subscribe">→</button>
+    </form>
+    <p class="toast"></p>
+    <div class="blog-grid" style="margin-top:32px">
+      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1400&q=80" alt=""></div><div class="copy"><div class="meta">Alex Morgan — January 11, 2026</div><h3>5 Simple Ways To Keep Your Car Clean And Fresh Daily</h3></div></a>
+      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1400&q=80" alt=""></div><div class="copy"><div class="meta">Emma Carter — February 22, 2026</div><h3>How Often Should You Wash Your Car To Keep Paint Fresh</h3></div></a>
+      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1400&q=80" alt=""></div><div class="copy"><div class="meta">James Wilson — March 23, 2026</div><h3>Why Professional Car Washing Benefits Your Vehicle</h3></div></a>
+      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=80" alt=""></div><div class="copy"><div class="meta">Daniel Carter — April 14, 2026</div><h3>How To Remove Tough Dirt And Road Grime From Cars</h3></div></a>
+      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1800&q=80" alt=""></div><div class="copy"><div class="meta">Ava Mitchell — May 25, 2026</div><h3>Benefits Of Regular Interior And Exterior Car Cleaning</h3></div></a>
+      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1800&q=80" alt=""></div><div class="copy"><div class="meta">Ryan Mitchell — June 16, 2026</div><h3>Easy Car Care Tips To Keep Your Vehicle Looking New</h3></div></a>
+    </div>
+    <div style="text-align:center;margin:22px 0 50px"><button class="btn btn-dark" type="button" data-more="[data-extra]"><span class="btn-text"><span>Load More</span><span>Load More</span></span></button></div>
+  </main>
+</div>
+<div class="view" data-page="blog">
+<article class="wrap page-hero">
+    <span class="eyebrow"><i></i> Blog details</span>
+    <h1 style="margin-top:16px">5 Simple Ways To Keep Your Car Clean And Fresh Daily</h1>
+    <p class="lede">Alex Morgan — January 11, 2026</p>
+    <img class="hero-img" style="margin-top:24px" src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1400&q=80" alt="" />
+    <div class="prose" style="max-width:760px;margin-top:28px">
+      <p>A clean car is easier to keep clean. A few small habits stop dust, crumbs, and road film from settling in, so the next wash takes less time and the paint stays brighter between visits.</p>
+      <p>Keep a small towel in the cabin for spills, shake out floor mats once a week, and rinse the exterior when pollen or salt builds up. Skip harsh household cleaners on paint and leather. Use a pH-balanced wash and a clean mitt, working top to bottom.</p>
+      <p>If the car sits outside, a quick rinse after rain keeps water spots from etching. For a finish that actually lasts, book a professional wash before grime has a chance to bond.</p>
+      <p><a class="btn" href="#/contact"><span class="btn-text"><span>Book your wash</span><span>Book your wash</span></span></a></p>
+    </div>
+  </article>
+  <div style="height:40px"></div>
+</div>
+<div class="view" data-page="contact">
+<main class="wrap page-hero">
+    <span class="eyebrow"><i></i> Contact Us</span>
+    <h1 style="margin-top:16px">Let’s talk today</h1>
+    <p class="lede"><a href="mailto:hello@dmzcarcare.com">hello@dmzcarcare.com</a> · <a href="tel:+15552840196">+1 555 284 0196</a> · New York, NY 10036, USA</p>
+    <div class="about-grid" style="margin-top:32px;align-items:start">
+      <form class="panel form" data-form>
+        <input name="name" required placeholder="Your name" />
+        <input name="email" type="email" required placeholder="Email" />
+        <input name="phone" placeholder="Phone" />
+        <select name="service">
+          <option>Basic car wash</option>
+          <option>Premium car wash</option>
+          <option>Interior car wash</option>
+          <option>Full car detail</option>
+        </select>
+        <textarea name="message" placeholder="How can we help?"></textarea>
+        <button class="btn" type="submit"><span class="btn-text"><span>Send message</span><span>Send message</span></span></button>
+        <p class="toast"></p>
+      </form>
+      <div>
+        <span class="eyebrow"><i></i> Our locations</span>
+        <h2 style="margin:14px 0 18px;font-size:42px">Find a car wash near you</h2>
+        <article class="panel" style="margin-bottom:12px"><h3>America</h3><p class="lede">hello@dmzcarcare.com<br>+1 (212) 555-4839<br>350 Fifth Avenue, New York, NY 10118</p></article>
+        <article class="panel" style="margin-bottom:12px"><h3>London</h3><p class="lede">london@dmzcarcare.com<br>+44 20 7946 0958<br>25 Oxford Street, London W1D 2DW</p></article>
+        <article class="panel"><h3>Australia</h3><p class="lede">sydney@dmzcarcare.com<br>+61 2 8015 4628<br>201 Sussex Street, Sydney NSW 2000</p></article>
+      </div>
+    </div>
+  </main>
+  <section class="wrap" style="padding:20px 0 60px">
+    <h2 style="margin-bottom:16px">Answers to common questions</h2>
+    <div class="faq">
+      <article class="faq-item open" data-faq><button type="button">How long does a car wash take? <span class="plus">+</span></button><div class="a"><p>A standard car wash usually takes around 30–60 minutes, depending on the service and the condition of your vehicle.</p></div></article>
+      <article class="faq-item" data-faq><button type="button">Do I need an appointment? <span class="plus">+</span></button><div class="a"><p>Appointments are recommended. Walk-ins are welcome when the schedule has room.</p></div></article>
+      <article class="faq-item" data-faq><button type="button">Do you offer mobile car washing? <span class="plus">+</span></button><div class="a"><p>Yes. We bring professional cleaning to your home, workplace, or another location you choose.</p></div></article>
+    </div>
+  </section>
+</div>
+<div class="view" data-page="404">
+<main class="miss">
+    <div>
+      <h1>404</h1>
+      <p class="lede" style="margin:0 auto 22px">This page took a wrong turn. Let’s get you back to a clean ride.</p>
+      <a class="btn btn-dark" href="#/home"><span class="btn-text"><span>Back home</span><span>Back home</span></span></a>
+    </div>
+  </main>
+</div>
+
+<div id="footer-root"></div>
+<script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+const pages = [
+  ["Home", "#/home"],
+  ["About", "#/about"],
+  ["Services", "#/services"],
+  ["Pricing", "#/pricing"],
+  ["Teams", "#/teams"],
+  ["Blogs", "#/blogs"],
+  ["Contact", "#/contact"],
+  ["Service details", "#/service"],
+  ["Blog details", "#/blog"],
+  ["404", "#/404"],
+];
+
+const brands = ["Hand Wash", "Ceramic Coat", "Interior Detail", "Paint Polish", "Wheel Care"];
+
+const socials = [
+  ['<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H6v4h3v9h4v-9h3.2l.8-4H13V9c0-.6.4-1 1-1z"/></svg>', "https://www.facebook.com/"],
+  ['<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h4.2l2.3 5.8L14.8 4H20l-6.2 7.2L20.4 20h-4.3l-2.7-6.2L8.8 20H4l6.6-8.2L4 4z"/></svg>', "https://x.com/"],
+  ['<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9H3V21h3V9zM4.5 3A1.8 1.8 0 1 0 4.5 6.6 1.8 1.8 0 0 0 4.5 3zM10 9h2.9v1.6h.1c.4-.8 1.4-1.7 3-1.7 3.2 0 3.8 2.1 3.8 4.8V21h-3v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H10V9z"/></svg>', "https://www.linkedin.com/"],
+  ['<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12.2a10.4 10.4 0 0 1-10.4 10.3A10.5 10.5 0 0 1 2.2 12 10.4 10.4 0 0 1 12.6 1.7 10.4 10.4 0 0 1 23 12.2zM10 8.5v7l6-3.5-6-3.5z"/></svg>', "https://www.youtube.com/"],
+];
+
+function btn(label, href, variant) {
+  const cls = variant ? `btn ${variant}` : "btn";
+  const tag = href ? "a" : "button";
+  const attr = href ? `href="${href}"` : 'type="button"';
+  return `<${tag} class="${cls}" ${attr}><span class="btn-text"><span>${label}</span><span>${label}</span></span></${tag}>`;
+}
+
+function currentFile() {
+  return "#/" + (document.body.dataset.page || "home");
+}
+
+function renderNav() {
+  const slot = document.getElementById("nav-slot");
+  if (!slot) return;
+  const here = currentFile();
+  const links = [
+    ["Home", "#/home"],
+    ["About", "#/about"],
+    ["Services", "#/services"],
+  ];
+  slot.innerHTML = `
+    <nav class="nav" aria-label="Primary">
+      <a class="logo" href="#/home" aria-label="DMzCarCare"><span class="logo-mark">DMz</span><span class="logo-word">CarCare</span></a>
+      <ul class="nav-links">
+        ${links.map(([label, href]) => `<li><a class="${here === href ? "active" : ""}" href="${href}">${label}</a></li>`).join("")}
+        <li class="drop">
+          <button class="drop-toggle" type="button" aria-expanded="false">All Pages <i class="chev"></i></button>
+          <div class="drop-menu">
+            ${pages.map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}
+          </div>
+        </li>
+      </ul>
+      <button class="burger" type="button" aria-label="Menu"><span></span></button>
+      ${btn("Contact now", "#/contact", "desktop-cta")}
+    </nav>`;
+}
+
+function renderFooter() {
+  const slot = document.getElementById("footer-root");
+  if (!slot) return;
+  const cols = [
+    ["Home", "#/home"],
+    ["About", "#/about"],
+    ["Pricing", "#/pricing"],
+    ["Teams", "#/teams"],
+    ["Services", "#/services"],
+    ["Blogs", "#/blogs"],
+    ["Contact", "#/contact"],
+  ];
+  const more = [
+    ["Service details", "#/service"],
+    ["Blog details", "#/blog"],
+    ["404", "#/404"],
+  ];
+  const brandLoop = [...brands, ...brands].map((b) => `<div class="brand"><span>${b}</span></div>`).join("");
+  slot.innerHTML = `
+    <div class="footer-wrap">
+      <div class="notch">DMzCarCare detailing</div>
+      <footer class="footer">
+        <div class="wrap footer-grid">
+          <div>
+            <h3>Book your car wash today</h3>
+            ${btn("Book your wash", "#/contact")}
+            <div class="news-label">Newsletter</div>
+            <form class="news" data-news>
+              <input type="email" required placeholder="Enter your email" aria-label="Newsletter" />
+              <button type="submit" aria-label="Subscribe">→</button>
+            </form>
+          </div>
+          <div class="foot-block">
+            <h4>Main pages</h4>
+            <div class="footer-links">
+              ${cols.map(([l, h]) => `<a href="${h}">${l}</a>`).join("")}
+            </div>
+            <div class="more">
+              <h4>More pages</h4>
+              <div class="footer-links">
+                ${more.map(([l, h]) => `<a href="${h}">${l}</a>`).join("")}
+              </div>
+            </div>
+          </div>
+          <div class="foot-block">
+            <h4>Contact</h4>
+            <p class="loc"><a href="mailto:hello@dmzcarcare.com">hello@dmzcarcare.com</a></p>
+            <p class="loc"><a href="tel:+15552840196">+1 555 284 0196</a></p>
+            <h4 style="margin-top:28px">Location</h4>
+            <p class="loc"><a href="https://www.google.com/maps" target="_blank" rel="noreferrer">125 West 42nd Street, New York, NY 10036, USA</a></p>
+            <p class="loc"><a href="https://www.google.com/maps" target="_blank" rel="noreferrer">842 Sunset Boulevard, Los Angeles, CA 90069, USA</a></p>
+            <div class="socials">
+              ${socials.map(([icon, href]) => `<a href="${href}" target="_blank" rel="noreferrer">${icon}</a>`).join("")}
+            </div>
+          </div>
+        </div>
+        <div class="wordmark" aria-hidden="true">
+          <div class="wordmark-track">
+            ${Array.from({ length: 8 }).map(() => `<span>DMzCarCare</span>`).join("")}
+          </div>
+        </div>
+        <p class="copy">© DMzCarCare — car care &amp; detailing — 2026</p>
+      </footer>
+    </div>`;
+  document.querySelectorAll("[data-brands]").forEach((el) => {
+    el.innerHTML = `<div class="marquee-track">${brandLoop}</div>`;
+  });
+}
+
+let navDocBound = false;
+function bindNav() {
+  const nav = document.querySelector(".nav");
+  if (!nav) return;
+  const drop = nav.querySelector(".drop");
+  const toggle = nav.querySelector(".drop-toggle");
+  toggle?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = drop.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  nav.querySelector(".burger")?.addEventListener("click", () => nav.classList.toggle("open"));
+  if (!navDocBound) {
+    document.addEventListener("click", () => document.querySelector(".drop")?.classList.remove("open"));
+    navDocBound = true;
+  }
+}
+
+function splitWords(el) {
+  if (el.dataset.split || el.children.length) return;
+  const words = el.textContent.trim().split(/\s+/).filter(Boolean);
+  if (!words.length) return;
+  el.dataset.split = "1";
+  el.innerHTML = words.map((word, i) => {
+    const safe = word.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    return `<span class="w"><span style="--i:${i}">${safe}</span></span>`;
+  }).join(" ");
+}
+
+function tagAll(selector, type, { stagger = 0.08, base = 0, skipNested = true } = {}) {
+  const groups = new Map();
+  document.querySelectorAll(selector).forEach((el) => {
+    if (el.dataset.anim || el.closest(".nav")) return;
+    if (skipNested && el.parentElement?.closest("[data-anim]")) return;
+    const parent = el.parentElement;
+    if (!groups.has(parent)) groups.set(parent, []);
+    groups.get(parent).push(el);
+  });
+  groups.forEach((list) => {
+    list.forEach((el, i) => {
+      el.dataset.anim = type;
+      el.style.setProperty("--d", `${base + Math.min(i, 10) * stagger}s`);
+      if (type === "words") splitWords(el);
+    });
+  });
+}
+
+let scrollIO;
+function watchScroll() {
+  if (scrollIO) scrollIO.disconnect();
+  const nodes = [...document.querySelectorAll("[data-anim]:not(.in)")];
+  if (!nodes.length) return;
+  const viewH = window.innerHeight || document.documentElement.clientHeight;
+  const pending = [];
+  nodes.forEach((node) => {
+    const rect = node.getBoundingClientRect();
+    const shown = rect.width > 0 && rect.height > 0 && rect.top < viewH * 0.92 && rect.bottom > 24;
+    if (shown) node.classList.add("in");
+    else pending.push(node);
+  });
+  if (!pending.length) return;
+  scrollIO = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("in");
+      scrollIO.unobserve(entry.target);
+    });
+  }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+  pending.forEach((node) => scrollIO.observe(node));
+}
+
+function cardSpread() {
+  const groups = [
+    ["#why .bento", ".b-card"],
+    ["#blogs .blog-grid", ".blog-card"],
+  ];
+  const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
+  const amount = (el) => {
+    const rect = el.getBoundingClientRect();
+    const viewH = window.innerHeight || document.documentElement.clientHeight;
+    const center = rect.top + rect.height / 2;
+    const enter = viewH * 1.02;
+    const holdBottom = viewH * 0.7;
+    const holdTop = viewH * 0.28;
+    const leave = viewH * 0.02;
+    if (center >= enter || center <= leave) return 0;
+    if (center <= holdBottom && center >= holdTop) return 1;
+    if (center > holdBottom) return clamp((enter - center) / (enter - holdBottom), 0, 1);
+    return clamp((center - leave) / (holdTop - leave), 0, 1);
+  };
+  const update = () => {
+    groups.forEach(([rootSel, cardSel]) => {
+      const box = document.querySelector(rootSel);
+      if (!box || !box.getClientRects().length) return;
+      const cards = [...box.querySelectorAll(cardSel)];
+      const rows = new Map();
+      cards.forEach((el) => {
+        const key = Math.round(el.offsetTop / 8);
+        if (!rows.has(key)) rows.set(key, []);
+        rows.get(key).push(el);
+      });
+      rows.forEach((row) => {
+        row.sort((a, b) => a.offsetLeft - b.offsetLeft);
+        const mid = row[Math.floor((row.length - 1) / 2)];
+        const midX = mid.offsetLeft + mid.offsetWidth / 2;
+        const spread = amount(mid);
+        row.forEach((el) => {
+          const cardX = el.offsetLeft + el.offsetWidth / 2;
+          const towardMiddle = midX - cardX;
+          const isMid = el === mid;
+          el.style.zIndex = isMid ? "2" : "1";
+          el.style.setProperty("--sx", (towardMiddle * (1 - spread)).toFixed(2) + "px");
+          el.style.setProperty("--ss", isMid ? "1" : (0.9 + 0.1 * spread).toFixed(3));
+          el.style.setProperty("--so", isMid ? "1" : spread.toFixed(3));
+        });
+      });
+    });
+  };
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  return update;
+}
+
+function reveals() {
+  tagAll(".price-card", "tilt", { stagger: 0, base: 0.08 });
+  tagAll(".step", "step", { stagger: 0.12 });
+  tagAll(".hero-card", "hero", { stagger: 0, base: 0.22 });
+  tagAll(".svc-card, .work, .t-card, .stat, .person, .member, .award, .tl, .faq-item, .svc-page-card, .plan, .panel", "rise", { stagger: 0.1 });
+  tagAll(".video-frame, .hero-img", "zoom", { stagger: 0.08, base: 0.08 });
+  tagAll(".eyebrow", "left", { stagger: 0.05 });
+  tagAll("h1, h2, .trust, .works-label", "words", { stagger: 0, base: 0.06 });
+  tagAll(".lede", "rise", { stagger: 0.06, base: 0.12 });
+  tagAll(".btn, .tick", "pop", { stagger: 0.06, base: 0.16 });
+  tagAll(".chip, .price-tabs button", "left", { stagger: 0.06 });
+  tagAll(".checks li", "left", { stagger: 0.05, base: 0.08 });
+  tagAll(".footer-grid > div", "rise", { stagger: 0.12 });
+  tagAll(".marquee", "rise", { stagger: 0, base: 0.05 });
+  document.addEventListener("animationend", (event) => {
+    const target = event.target;
+    if (target.matches?.(".shot img, img.shot, .video-frame video, .video-frame img, .hero-img")) {
+      target.classList.add("settled");
+      return;
+    }
+    const el = target.closest?.("[data-anim]");
+    if (!el || el.dataset.anim === "words" || target !== el) return;
+    el.classList.add("settled");
+  });
+  watchScroll();
+}
+
+function services() {
+  const cards = [...document.querySelectorAll("[data-svc]")];
+  if (!cards.length) return;
+  const set = (index) => cards.forEach((card, i) => card.classList.toggle("open", i === index));
+  cards.forEach((card, i) => {
+    card.querySelectorAll("[data-svc-toggle]").forEach((btn) => {
+      btn.addEventListener("click", () => set(card.classList.contains("open") ? -1 : i));
+    });
+  });
+}
+
+function process() {
+  const steps = [...document.querySelectorAll("[data-step]")];
+  const ticks = [...document.querySelectorAll("[data-tick]")];
+  if (!steps.length) return;
+  const set = (index) => {
+    steps.forEach((s, i) => s.classList.toggle("active", i === index));
+    ticks.forEach((t, i) => t.classList.toggle("active", i === index));
+  };
+  steps.forEach((s, i) => s.addEventListener("mouseenter", () => set(i)));
+  ticks.forEach((t, i) => t.addEventListener("click", () => set(i)));
+}
+
+function pricing() {
+  const root = document.querySelector("[data-pricing]");
+  if (!root) return;
+  const plans = {
+    sedan: ["$149 USD", "Premium wash", "A complete wash focused on keeping your car clean, fresh, and polished."],
+    suv: ["$179 USD", "SUV premium wash", "Extra coverage for taller vehicles, with a deep clean inside and out."],
+    truck: ["$219 USD", "Truck wash", "A heavier wash built for trucks, beds, wheels, and road film."],
+    luxury: ["$299 USD", "Luxury detail wash", "Careful hand finishing for premium paint, trim, and cabin surfaces."],
+  };
+  const amount = root.querySelector("[data-amount]");
+  const title = root.querySelector("[data-title]");
+  const desc = root.querySelector("[data-desc]");
+  root.querySelectorAll("[data-plan]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      root.querySelectorAll("[data-plan]").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const [price, name, text] = plans[btn.dataset.plan];
+      amount.textContent = price;
+      title.textContent = name;
+      desc.textContent = text;
+      amount.animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }], { duration: 360, easing: "cubic-bezier(.22,1,.36,1)" });
+    });
+  });
+}
+
+function slider() {
+  document.querySelectorAll("[data-slider]").forEach((root) => {
+    const track = root.querySelector(".track");
+    const cards = [...track.children];
+    let index = 0;
+    const per = () => (window.innerWidth <= 1100 ? 1 : 2);
+    const max = () => Math.max(0, cards.length - per());
+    const go = (next) => {
+      index = Math.min(max(), Math.max(0, next));
+      const card = cards[0];
+      if (!card) return;
+      const gap = 18;
+      const w = card.getBoundingClientRect().width + gap;
+      track.style.transform = `translateX(${-index * w}px)`;
+      root.querySelector("[data-prev]").disabled = index === 0;
+      root.querySelector("[data-next]").disabled = index === max();
+    };
+    root.querySelector("[data-prev]").addEventListener("click", () => go(index - 1));
+    root.querySelector("[data-next]").addEventListener("click", () => go(index + 1));
+    window.addEventListener("resize", () => go(index));
+    go(0);
+  });
+}
+
+function stack() {
+  const cards = [...document.querySelectorAll(".work")];
+  if (cards.length < 2 || window.innerWidth <= 1100) return;
+  const onScroll = () => {
+    cards.forEach((card, i) => {
+      if (i === cards.length - 1) return;
+      const nextTop = cards[i + 1].getBoundingClientRect().top;
+      const p = 1 - Math.min(Math.max((nextTop - 80) / 420, 0), 1);
+      card.style.transform = `scale(${1 - p * 0.05})`;
+      card.style.filter = `brightness(${1 - p * 0.18})`;
+    });
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+function faq() {
+  document.querySelectorAll("[data-faq]").forEach((item) => {
+    item.querySelector("button").addEventListener("click", () => {
+      const open = item.classList.contains("open");
+      item.parentElement.querySelectorAll("[data-faq]").forEach((n) => n.classList.remove("open"));
+      if (!open) item.classList.add("open");
+    });
+  });
+}
+
+function forms() {
+  document.querySelectorAll("[data-news], [data-form]").forEach((form) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let toast = form.querySelector(".toast") || form.parentElement.querySelector(".toast");
+      if (!toast) {
+        toast = document.createElement("p");
+        toast.className = "toast";
+        form.after(toast);
+      }
+      toast.classList.add("show");
+      toast.textContent = form.hasAttribute("data-news") ? "You’re on the list." : "Message sent. We’ll reply shortly.";
+      form.reset();
+    });
+  });
+}
+
+function loadMore() {
+  document.querySelectorAll("[data-more]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const scope = btn.closest(".view") || document;
+      scope.querySelectorAll(btn.dataset.more).forEach((el) => el.classList.add("show"));
+      btn.remove();
+      watchScroll();
+    });
+  });
+}
+
+function beforeAfter() {
+  const cars = document.querySelectorAll(".ba-car");
+  if (!cars.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const hold = 1500;
+  const fade = 400;
+  cars.forEach((car) => {
+    let clean = false;
+    const tick = () => {
+      clean = !clean;
+      car.classList.toggle("show-after", clean);
+      window.setTimeout(tick, hold + fade);
+    };
+    window.setTimeout(tick, hold);
+  });
+}
+
+function filters() {
+  const row = document.querySelector("[data-filter]");
+  if (!row) return;
+  row.querySelectorAll(".chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      row.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      const key = chip.dataset.filter;
+      document.querySelectorAll("[data-kind]").forEach((card) => {
+        const kinds = (card.dataset.kind || "").split(/\s+/);
+        card.style.display = key === "all" || kinds.includes(key) ? "" : "none";
+      });
+    });
+  });
+}
+
+const titles = {
+  home: "DMzCarCare — Car care & detailing",
+  about: "About — DMzCarCare",
+  services: "Services — DMzCarCare",
+  service: "Basic car wash — DMzCarCare",
+  pricing: "Pricing — DMzCarCare",
+  teams: "Teams — DMzCarCare",
+  blogs: "Blogs — DMzCarCare",
+  blog: "5 Simple Ways To Keep Your Car Clean — DMzCarCare",
+  contact: "Contact — DMzCarCare",
+  "404": "404 — DMzCarCare",
+};
+
+function pageFromLocation() {
+  const hash = location.hash;
+  if (hash.startsWith("#/")) {
+    const id = hash.slice(2) || "home";
+    return document.querySelector('.view[data-page="' + id + '"]') ? id : "404";
+  }
+  return "home";
+}
+
+let lenis = null;
+
+function startLenis() {
+  if (typeof Lenis !== "function") return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  lenis = new Lenis({
+    autoRaf: true,
+    lerp: 0.075,
+    smoothWheel: true,
+    anchors: false,
+    wheelMultiplier: 0.9,
+  });
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href^='#']");
+    if (!link || !lenis) return;
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#/")) return;
+    const target = document.querySelector(href);
+    if (!target) return;
+    event.preventDefault();
+    lenis.scrollTo(target, { offset: -8 });
+  });
+}
+
+function showPage(id) {
+  document.querySelectorAll(".view").forEach((view) => {
+    view.classList.toggle("active", view.dataset.page === id);
+  });
+  document.body.dataset.page = id;
+  document.body.classList.toggle("home", id === "home");
+  document.body.classList.toggle("inner", id !== "home");
+  document.title = titles[id] || "DMzCarCare";
+  renderNav();
+  bindNav();
+  if (lenis) lenis.scrollTo(0, { immediate: true });
+  else window.scrollTo(0, 0);
+  requestAnimationFrame(() => {
+    watchScroll();
+    updateCardSpread();
+    lenis?.resize();
+  });
+}
+
+window.addEventListener("hashchange", () => {
+  if (location.hash.startsWith("#/")) showPage(pageFromLocation());
+});
+
+startLenis();
+showPage(pageFromLocation());
+renderFooter();
+reveals();
+const updateCardSpread = cardSpread();
+services();
+process();
+pricing();
+slider();
+stack();
+faq();
+forms();
+loadMore();
+filters();
+beforeAfter();
+
+</script>
+</body>
+</html>
