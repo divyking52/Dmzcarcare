@@ -1383,8 +1383,8 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
   .work { position: relative; top: auto; }
 }
 @media (max-width: 780px) {
-  .wrap { width: min(100% - 32px, var(--max)); }
-  .nav-links { 
+  .wrap { width: min(100% - 28px, var(--max)); }
+  .nav-links {
     display: none;
     position: absolute;
     top: 78px;
@@ -1402,35 +1402,126 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
   .burger { display: inline-block; }
   .drop-menu { position: static; translate: none; transform: none; opacity: 1; pointer-events: auto; display: none; box-shadow: none; }
   .drop.open .drop-menu { display: block; }
-  .hero { margin: 8px; min-height: 0; height: auto; border-radius: 24px; }
-  .hero-bottom { position: relative; left: auto; right: auto; bottom: auto; flex-direction: column; align-items: flex-start; padding: 42vh 16px 28px; }
-  .hero h1 { font-size: 64px; }
-  .hero-card { min-width: 0; width: 100%; }
-  .section-head { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .section-head h2, .center-block h2, .center-title { font-size: clamp(34px, 9vw, 48px); }
-  .feedback h2 { font-size: clamp(40px, 12vw, 64px); }
-  .steps, .timeline, .blog-grid, .cards-4, .cards-3, .stats, .svc-page-card { grid-template-columns: 1fr; }
-  .step { min-height: 0; }
-  .work-meta { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .meta-row { flex-wrap: wrap; width: 100%; }
-  .meta-row div { padding: 0 18px 0 0; border-left: 0; }
-  .work-card img.shot { height: 240px; border-radius: 24px; }
-  .price-card { padding: 22px; }
-  .price-card h3 { font-size: 32px; }
-  .slider-wrap { grid-template-columns: 40px 1fr 40px; gap: 8px; }
-  .arrow { height: 120px; }
-  .shell { margin: 12px 8px; border-radius: 28px; }
-  .shell-pad { padding: 48px 0 36px; }
-  .b-card { min-height: 0; }
+
+  .hero {
+    margin: 8px;
+    height: calc(100svh - 16px);
+    min-height: 620px;
+    border-radius: 28px;
+  }
+  .hero-media, .hero-shade { border-radius: 28px; }
+  .hero-bottom { left: 14px; right: 14px; bottom: 48px; gap: 10px; }
+  .hero h1 { font-size: clamp(42px, 12vw, 60px); }
+  .hero-card {
+    min-width: 0;
+    flex: 0 1 158px;
+    gap: 8px;
+    padding: 6px 8px 6px 6px;
+    border-radius: 18px;
+  }
+  .hero-card img { width: 40px; height: 40px; border-radius: 12px; }
+  .hero-card p { font-size: 11px; margin-bottom: 1px; }
+  .hero-card strong { font-size: 11px; letter-spacing: -0.04em; }
+  .scroll-hint { font-size: 13px; padding: 10px 14px; }
+
+  .section-head { gap: 12px; margin-bottom: 22px; }
+  .section-head h2, .center-block h2, .center-title { font-size: clamp(28px, 7.6vw, 42px); }
+  .section-head .btn { flex: none; }
+  .feedback h2 { font-size: clamp(42px, 12.5vw, 68px); }
+  .lede { font-size: 15px; }
+  .video-frame { height: 280px; }
+
+  .svc-bar { min-height: 62px; padding: 0 12px; grid-template-columns: 32px 1fr 36px; }
+  .svc-bar h3 { font-size: 20px; }
+  .svc-open { padding: 20px 14px 10px; gap: 14px; min-height: 0; }
+  .svc-open h3 { font-size: 26px; }
+  .svc-copy { min-height: 0; }
+  .svc-open img { height: 180px; }
+
+  .process-sec { padding: 56px 0 40px; }
+  .steps, .cards-4, .cards-3 { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .step { min-height: 210px; padding: 16px; border-radius: 22px; }
+  .step h3 { font-size: 20px; }
+  .step p { font-size: 13px; }
+  .step-icon { width: 44px; height: 44px; border-radius: 14px; }
+  .timeline { grid-template-columns: 1fr; }
+  #process .timeline { grid-template-columns: repeat(4, 1fr); }
+  .tick { width: 42px; height: 42px; font-size: 14px; }
+
+  .work-card img.shot { height: min(52vh, 420px); border-radius: 24px; }
+  .work-meta { gap: 12px; padding: 14px 2px 0; align-items: flex-end; }
+  .work-meta h3 { font-size: 20px; flex: 0 1 118px; min-width: 0; }
+  .meta-row { flex: 1; min-width: 0; }
+  .meta-row div { padding: 0 8px; min-width: 0; flex: 1; }
+  .meta-row div:first-child { flex: 1.35; }
+  .meta-row span { font-size: 10px; margin-bottom: 2px; }
+  .meta-row strong { font-size: 13px; line-height: 1.15; }
+
+  .bento {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 10px;
+  }
+  .b-premium { grid-column: 1; grid-row: 1 / span 2; }
+  .b-team { grid-column: 2; grid-row: 1; }
+  .b-stats { grid-column: 2; grid-row: 2; }
+  .b-why { grid-column: 1 / -1; grid-row: 3; gap: 12px; }
+  .b-card { min-height: 0; padding: 14px; border-radius: 22px; }
+  .b-card h3, .b-card h4 { font-size: 18px; margin-bottom: 6px; }
+  .b-card p, .b-card li { font-size: 13px; line-height: 1.35; }
+  .b-premium img { height: 120px; }
+  .b-why .cover, .b-why video { height: 150px; border-radius: 16px; }
+  .team-photo { height: 72px; margin-top: 10px; }
+  .avatars img { width: 32px; height: 32px; }
+  .logo-float .mark { font-size: 16px; padding: 6px 8px; }
+
+  .price-layout, .price-card, .price-card img { min-width: 0; }
+  .price-tabs { flex-direction: row; flex-wrap: wrap; gap: 6px; overflow: visible; padding-top: 0; }
+  .price-tabs button { white-space: nowrap; font-size: 13px; padding: 8px 10px; border-bottom: 0; }
+  .price-card {
+    grid-template-columns: minmax(0, 1fr) 112px;
+    padding: 16px;
+    gap: 12px;
+    border-radius: 28px;
+    overflow: hidden;
+  }
+  .price-card h3 { font-size: 24px; }
+  .price-card .desc { margin-bottom: 10px; font-size: 13px; }
+  .price-card .amount { font-size: 34px; margin-bottom: 8px; }
+  .price-card img { height: 100%; min-height: 110px; border-radius: 16px; }
+
+  .slider-wrap { grid-template-columns: 34px 1fr 34px; gap: 8px; }
+  .arrow { height: 148px; font-size: 18px; }
+  .t-card { min-height: 0; padding: 16px; border-radius: 24px; }
+  .t-card blockquote { font-size: 18px; }
+  .t-top img.avatar { width: 52px; height: 52px; }
+  .t-top h3 { font-size: 16px; }
+
+  .shell { margin: 10px 8px; border-radius: 28px; }
+  .shell-pad { padding: 36px 0 24px; }
+  .ba-panel { padding: 24px 14px 8px; border-radius: 28px; }
+  .ba-stage { min-height: 220px; }
+  .ba-car { border-radius: 18px; }
+
+  .blog-grid { grid-template-columns: 1fr; }
   .blog-card { min-height: 0; }
-  .ba-stage { min-height: 0; }
-  .ba-panel { padding: 24px 16px 12px; }
-  .foot-block { padding: 0; border-left: 0; }
-  .footer { border-radius: 28px; }
+  .blog-card .shot { height: 200px; }
+  .blog-card h3 { font-size: 22px; }
+
+  .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat { padding: 12px 8px; border-radius: 18px; }
+  .stat strong { font-size: 24px; }
+
+  .footer { border-radius: 28px; padding: 52px 0 18px; }
   .footer h3 { font-size: 32px; }
-  .wordmark-track span { font-size: 48px; }
-  .scroll-hint { font-size: 13px; }
-  .video-frame { height: 240px; }
+  .foot-block { padding: 16px 0 0; border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+  .wordmark-track span { font-size: 52px; }
+  .page-hero h1 { font-size: clamp(38px, 10vw, 52px); }
+  .svc-page-card { grid-template-columns: 84px 1fr; gap: 12px; padding: 10px; }
+  .svc-page-card img { width: 84px; height: 68px; }
+  .svc-page-card > .btn { grid-column: 2; justify-self: start; }
+  .tl { grid-template-columns: 62px 14px 1fr; gap: 8px; }
+  .tl-year { font-size: 18px; }
+  .article img.hero-img { height: 240px; }
 }
 
 .view { display: none; }
@@ -1458,8 +1549,8 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
 <div class="view active" data-page="home">
 <header class="hero">
     <div class="hero-media" aria-hidden="true">
-      <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=2000&q=80" alt="" />
-      <img class="alt" src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=2000&q=80" alt="" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Toyota_Fortuner_4x2_Legender_2023_%2810%29.jpg/1920px-Toyota_Fortuner_4x2_Legender_2023_%2810%29.jpg" alt="" />
+      <img class="alt" src="https://images.pexels.com/photos/29504457/pexels-photo-29504457.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" />
     </div>
     <div class="hero-shade"></div>
     <div class="hero-bottom">
@@ -1484,7 +1575,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
         <div style="margin-top:22px"><a class="btn btn-dark" href="#/contact"><span class="btn-text"><span>Contact now</span><span>Contact now</span></span></a></div>
       </div>
       <div class="video-frame reveal">
-        <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1600&q=80" alt="Detailing at DMzCarCare" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/2021_Hyundai_Creta_SX%28O%29_CRDi_%28India%29_front_view.jpg/1920px-2021_Hyundai_Creta_SX%28O%29_CRDi_%28India%29_front_view.jpg" alt="Hyundai Creta at DMzCarCare" />
       </div>
     </div>
     <div class="wrap">
@@ -1517,7 +1608,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
                   <p class="desc">Quick exterior cleaning to remove dirt, dust, and everyday road grime.</p>
                   <span class="svc-num">01</span>
                 </div>
-                <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1400&q=80" alt="Basic car wash" />
+                <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1600&q=80" alt="Indian car foam wash" />
                 <ul class="checks">
                   <li>Quick exterior cleaning</li>
                   <li>Everyday dirt removal</li>
@@ -1544,7 +1635,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
                 <p class="desc">Deep exterior cleaning for a brighter shine and polished finish.</p>
                 <span class="svc-num">02</span>
               </div>
-              <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1400&q=80" alt="Premium car wash" />
+              <img src="https://images.unsplash.com/photo-1748214547184-d994bfe53322?auto=format&fit=crop&w=1600&q=80" alt="Hyundai Creta premium wash" />
               <ul class="checks">
                 <li>Deep exterior cleaning</li>
                 <li>High gloss finish</li>
@@ -1568,7 +1659,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
                 <p class="desc">Thorough interior cleaning to keep your cabin fresh, clean, and comfortable.</p>
                 <span class="svc-num">03</span>
               </div>
-              <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1400&q=80" alt="Interior car wash" />
+              <img src="https://images.pexels.com/photos/6872575/pexels-photo-6872575.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Hand sponge wash on Indian car" />
               <ul class="checks">
                 <li>Deep seat cleaning</li>
                 <li>Complete floor cleaning</li>
@@ -1592,7 +1683,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
                 <p class="desc">Complete interior and exterior care for a spotless, refreshed vehicle.</p>
                 <span class="svc-num">04</span>
               </div>
-              <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1400&q=80" alt="Full car detail" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/2020_Toyota_Fortuner_2.4_VRZ_TRD_Sportivo_4x2_GUN165R_%2820220215%29.jpg/1920px-2020_Toyota_Fortuner_2.4_VRZ_TRD_Sportivo_4x2_GUN165R_%2820220215%29.jpg" alt="Toyota Fortuner full detail" />
               <ul class="checks">
                 <li>Complete exterior care</li>
                 <li>Deep interior cleaning</li>
@@ -1645,48 +1736,48 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
       <div class="works-label">Recent Works</div>
       <article class="work">
         <div class="work-card">
-          <img class="shot" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=80" alt="Luxury car detailing" />
+          <img class="shot" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Toyota_Fortuner_4x2_Legender_2023_%2810%29.jpg/1920px-Toyota_Fortuner_4x2_Legender_2023_%2810%29.jpg" alt="Toyota Fortuner detailing" />
           <div class="work-meta">
             <div>
               <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <h3>Luxury car detailing</h3>
+              <h3>Fortuner detailing</h3>
             </div>
             <div class="meta-row">
               <div><span>Service</span><strong>Full car detailing</strong></div>
               <div><span>Year</span><strong>2026</strong></div>
-              <div><span>Vehicle</span><strong>Sedan</strong></div>
+              <div><span>Vehicle</span><strong>Fortuner</strong></div>
             </div>
           </div>
         </div>
       </article>
       <article class="work">
         <div class="work-card">
-          <img class="shot" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1800&q=80" alt="Wash and polish" />
+          <img class="shot" src="https://upload.wikimedia.org/wikipedia/commons/2/21/2024_Hyundai_Creta_1.5_MPi_SX%28O%29_%28India%29_front_view.png" alt="Hyundai Creta wash and polish" />
           <div class="work-meta">
             <div>
               <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <h3>Wash &amp; polish</h3>
+              <h3>Creta wash &amp; polish</h3>
             </div>
             <div class="meta-row">
-              <div><span>Service</span><strong>Full car detailing</strong></div>
+              <div><span>Service</span><strong>Wash &amp; polish</strong></div>
               <div><span>Year</span><strong>2025</strong></div>
-              <div><span>Vehicle</span><strong>SUV</strong></div>
+              <div><span>Vehicle</span><strong>Creta</strong></div>
             </div>
           </div>
         </div>
       </article>
       <article class="work">
         <div class="work-card">
-          <img class="shot" src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1800&q=80" alt="Luxury car detailing" />
+          <img class="shot" src="https://images.pexels.com/photos/29504457/pexels-photo-29504457.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Indian SUV foam wash" />
           <div class="work-meta">
             <div>
               <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <h3>Luxury car detailing</h3>
+              <h3>Foam wash finish</h3>
             </div>
             <div class="meta-row">
-              <div><span>Service</span><strong>Full detailing</strong></div>
+              <div><span>Service</span><strong>Foam exterior wash</strong></div>
               <div><span>Year</span><strong>2026</strong></div>
-              <div><span>Vehicle</span><strong>Sedan</strong></div>
+              <div><span>Vehicle</span><strong>SUV</strong></div>
             </div>
           </div>
         </div>
@@ -1705,7 +1796,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
           <h3>Premium car care</h3>
           <p>Professional washing and detailing that keeps your car clean fresh and ready for every drive.</p>
           <div style="margin-top:18px"><a class="btn" href="#/contact"><span class="btn-text"><span>Book a service</span><span>Book a service</span></span></a></div>
-          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80" alt="Freshly detailed yellow car" />
+          <img src="https://images.unsplash.com/photo-1685110044035-4fdeb816cdb2?auto=format&fit=crop&w=1800&q=80" alt="Toyota Fortuner after care" />
         </article>
         <article class="b-card b-team reveal">
           <h4 style="text-align:center">Skilled car team</h4>
@@ -1714,7 +1805,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
         </article>
         <article class="b-card b-why reveal">
           <div class="logo-float">
-            <img class="cover" src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1400&q=80" alt="DMzCarCare detailing bay" />
+            <img class="cover" src="https://images.pexels.com/photos/4870739/pexels-photo-4870739.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Indian car under foam wash" />
             <span class="mark">DMz</span>
           </div>
           <h4>Why choose</h4>
@@ -1769,7 +1860,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
             <div class="amount" data-amount>$149 USD</div>
             <a class="btn" href="#/contact"><span class="btn-text"><span>Book now</span><span>Book now</span></span></a>
           </div>
-          <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1400&q=80" alt="Premium wash" />
+          <img src="https://images.unsplash.com/photo-1748214547306-360d11024747?auto=format&fit=crop&w=1600&q=80" alt="Hyundai Creta premium wash plan" />
           <div class="included">
             <h4>What's included:</h4>
             <ul class="checks cols">
@@ -1869,8 +1960,8 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
             </svg>
           </div>
           <div class="ba-car">
-            <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&w=1800&q=80" alt="Car before detailing" />
-            <img class="after" src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1800&q=80" alt="Car after detailing" />
+            <img src="https://images.pexels.com/photos/4870739/pexels-photo-4870739.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Indian car before wash" />
+            <img class="after" src="https://upload.wikimedia.org/wikipedia/commons/2/21/2024_Hyundai_Creta_1.5_MPi_SX%28O%29_%28India%29_front_view.png" alt="Hyundai Creta after detailing" />
           </div>
         </div>
       </div>
@@ -1888,7 +1979,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
       </div>
       <div class="blog-grid">
         <a class="blog-card" href="#/blog">
-          <div class="shot"><img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1400&q=80" alt="" /></div>
+          <div class="shot"><img src="https://images.pexels.com/photos/6873088/pexels-photo-6873088.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" /></div>
           <div class="copy">
             <div class="meta">Alex Morgan — January 11, 2026</div>
             <h3>5 Simple Ways To Keep Your Car Clean And Fresh Daily</h3>
@@ -1896,7 +1987,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
           </div>
         </a>
         <a class="blog-card flip" href="#/blog">
-          <div class="shot"><img src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1400&q=80" alt="" /></div>
+          <div class="shot"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Hyundai_Creta_India.jpg/1920px-Hyundai_Creta_India.jpg" alt="" /></div>
           <div class="copy">
             <div class="meta">Emma Carter — February 22, 2026</div>
             <h3>How Often Should You Wash Your Car To Keep Paint Fresh</h3>
@@ -1904,7 +1995,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
           </div>
         </a>
         <a class="blog-card" href="#/blog">
-          <div class="shot"><img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1400&q=80" alt="" /></div>
+          <div class="shot"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Toyota_Fortuner%2C_Vietnam_%28KUN60%29.jpg/1920px-Toyota_Fortuner%2C_Vietnam_%28KUN60%29.jpg" alt="" /></div>
           <div class="copy">
             <div class="meta">James Wilson — March 23, 2026</div>
             <h3>Why Professional Car Washing Benefits Your Vehicle</h3>
@@ -1930,7 +2021,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
   <section class="wrap" style="padding:48px 0">
     <div class="about-grid">
       <div class="video-frame reveal">
-        <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1600&q=80" alt="Detailing at DMzCarCare" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/2021_Hyundai_Creta_SX%28O%29_CRDi_%28India%29_front_view.jpg/1920px-2021_Hyundai_Creta_SX%28O%29_CRDi_%28India%29_front_view.jpg" alt="Hyundai Creta at DMzCarCare" />
       </div>
       <div class="reveal">
         <span class="eyebrow"><i></i> Our story</span>
@@ -1994,32 +2085,32 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
   </main>
   <section class="wrap" style="padding:28px 0 40px">
     <a class="svc-page-card" href="#/service">
-      <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1400&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1600&q=80" alt="Indian car foam wash">
       <div><h3>01 Basic car wash</h3><p class="lede">Quick exterior cleaning to remove dirt, dust, and everyday road grime.</p></div>
       <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
     </a>
     <a class="svc-page-card" href="#/service">
-      <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1400&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1748214547184-d994bfe53322?auto=format&fit=crop&w=1600&q=80" alt="Hyundai Creta">
       <div><h3>02 Premium car wash</h3><p class="lede">Deep exterior cleaning for a brighter shine and polished finish.</p></div>
       <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
     </a>
     <a class="svc-page-card" href="#/service">
-      <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1400&q=80" alt="">
+      <img src="https://images.pexels.com/photos/6872575/pexels-photo-6872575.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Hand wash">
       <div><h3>03 Interior car wash</h3><p class="lede">Thorough interior cleaning to keep your cabin fresh, clean, and comfortable.</p></div>
       <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
     </a>
     <a class="svc-page-card" href="#/service">
-      <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1400&q=80" alt="">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/2020_Toyota_Fortuner_2.4_VRZ_TRD_Sportivo_4x2_GUN165R_%2820220215%29.jpg/1920px-2020_Toyota_Fortuner_2.4_VRZ_TRD_Sportivo_4x2_GUN165R_%2820220215%29.jpg" alt="Toyota Fortuner">
       <div><h3>04 Full car detail</h3><p class="lede">Complete interior and exterior care for a spotless, refreshed vehicle.</p></div>
       <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
     </a>
     <a class="svc-page-card hidden-card" data-extra href="#/service">
-      <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1400&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1748214547306-360d11024747?auto=format&fit=crop&w=1600&q=80" alt="Hyundai Creta">
       <div><h3>05 Ceramic coating</h3><p class="lede">Protective coating designed to add shine and lasting surface protection.</p></div>
       <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
     </a>
     <a class="svc-page-card hidden-card" data-extra href="#/service">
-      <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1800&q=80" alt="">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Toyota_Fortuner_4x2_Legender_2023_%2810%29.jpg/1920px-Toyota_Fortuner_4x2_Legender_2023_%2810%29.jpg" alt="Toyota Fortuner">
       <div><h3>06 Window tint</h3><p class="lede">Professional window tinting for comfort, privacy, and UV protection.</p></div>
       <span class="btn btn-dark btn-sm"><span class="btn-text"><span>View details</span><span>View details</span></span></span>
     </a>
@@ -2055,7 +2146,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
       </ul>
       <a class="btn" href="#/contact"><span class="btn-text"><span>Book this wash</span><span>Book this wash</span></span></a>
     </div>
-    <img class="hero-img" src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1400&q=80" alt="Basic car wash" />
+    <img class="hero-img" src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1600&q=80" alt="Indian car foam wash" />
   </main>
   <section class="wrap" style="padding:10px 0 70px">
     <div class="plans">
@@ -2125,12 +2216,12 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
     </form>
     <p class="toast"></p>
     <div class="blog-grid" style="margin-top:32px">
-      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1400&q=80" alt=""></div><div class="copy"><div class="meta">Alex Morgan — January 11, 2026</div><h3>5 Simple Ways To Keep Your Car Clean And Fresh Daily</h3></div></a>
-      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1400&q=80" alt=""></div><div class="copy"><div class="meta">Emma Carter — February 22, 2026</div><h3>How Often Should You Wash Your Car To Keep Paint Fresh</h3></div></a>
-      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1400&q=80" alt=""></div><div class="copy"><div class="meta">James Wilson — March 23, 2026</div><h3>Why Professional Car Washing Benefits Your Vehicle</h3></div></a>
-      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=80" alt=""></div><div class="copy"><div class="meta">Daniel Carter — April 14, 2026</div><h3>How To Remove Tough Dirt And Road Grime From Cars</h3></div></a>
-      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1800&q=80" alt=""></div><div class="copy"><div class="meta">Ava Mitchell — May 25, 2026</div><h3>Benefits Of Regular Interior And Exterior Car Cleaning</h3></div></a>
-      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1800&q=80" alt=""></div><div class="copy"><div class="meta">Ryan Mitchell — June 16, 2026</div><h3>Easy Car Care Tips To Keep Your Vehicle Looking New</h3></div></a>
+      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://images.pexels.com/photos/6873088/pexels-photo-6873088.jpeg?auto=compress&cs=tinysrgb&w=1600" alt=""></div><div class="copy"><div class="meta">Alex Morgan — January 11, 2026</div><h3>5 Simple Ways To Keep Your Car Clean And Fresh Daily</h3></div></a>
+      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Hyundai_Creta_India.jpg/1920px-Hyundai_Creta_India.jpg" alt=""></div><div class="copy"><div class="meta">Emma Carter — February 22, 2026</div><h3>How Often Should You Wash Your Car To Keep Paint Fresh</h3></div></a>
+      <a class="blog-card" href="#/blog"><div class="shot"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Toyota_Fortuner%2C_Vietnam_%28KUN60%29.jpg/1920px-Toyota_Fortuner%2C_Vietnam_%28KUN60%29.jpg" alt=""></div><div class="copy"><div class="meta">James Wilson — March 23, 2026</div><h3>Why Professional Car Washing Benefits Your Vehicle</h3></div></a>
+      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Toyota_Fortuner_4x2_Legender_2023_%2810%29.jpg/1920px-Toyota_Fortuner_4x2_Legender_2023_%2810%29.jpg" alt=""></div><div class="copy"><div class="meta">Daniel Carter — April 14, 2026</div><h3>How To Remove Tough Dirt And Road Grime From Cars</h3></div></a>
+      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://upload.wikimedia.org/wikipedia/commons/2/21/2024_Hyundai_Creta_1.5_MPi_SX%28O%29_%28India%29_front_view.png" alt=""></div><div class="copy"><div class="meta">Ava Mitchell — May 25, 2026</div><h3>Benefits Of Regular Interior And Exterior Car Cleaning</h3></div></a>
+      <a class="blog-card hidden-card" data-extra href="#/blog"><div class="shot"><img src="https://images.pexels.com/photos/29504457/pexels-photo-29504457.jpeg?auto=compress&cs=tinysrgb&w=1800" alt=""></div><div class="copy"><div class="meta">Ryan Mitchell — June 16, 2026</div><h3>Easy Car Care Tips To Keep Your Vehicle Looking New</h3></div></a>
     </div>
     <div style="text-align:center;margin:22px 0 50px"><button class="btn btn-dark" type="button" data-more="[data-extra]"><span class="btn-text"><span>Load More</span><span>Load More</span></span></button></div>
   </main>
@@ -2140,7 +2231,7 @@ a.blog-card.hidden-card.show { display: flex; animation: rise 0.5s var(--ease); 
     <span class="eyebrow"><i></i> Blog details</span>
     <h1 style="margin-top:16px">5 Simple Ways To Keep Your Car Clean And Fresh Daily</h1>
     <p class="lede">Alex Morgan — January 11, 2026</p>
-    <img class="hero-img" style="margin-top:24px" src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1400&q=80" alt="" />
+    <img class="hero-img" style="margin-top:24px" src="https://images.pexels.com/photos/6873088/pexels-photo-6873088.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
     <div class="prose" style="max-width:760px;margin-top:28px">
       <p>A clean car is easier to keep clean. A few small habits stop dust, crumbs, and road film from settling in, so the next wash takes less time and the paint stays brighter between visits.</p>
       <p>Keep a small towel in the cabin for spills, shake out floor mats once a week, and rinse the exterior when pollen or salt builds up. Skip harsh household cleaners on paint and leather. Use a pH-balanced wash and a clean mitt, working top to bottom.</p>
